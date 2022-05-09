@@ -8,11 +8,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import kiwi.orbit.compose.ui.controls.TextField
 
 @Preview(showSystemUi = true)
 @Composable
 fun LoginScreen() {
+
+    val viewModel: LoginScreenViewModel = hiltViewModel()
 
     var server by remember { mutableStateOf("192.168.") }
 

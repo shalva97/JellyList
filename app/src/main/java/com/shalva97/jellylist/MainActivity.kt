@@ -28,7 +28,6 @@ fun JellyList() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "login") {
-//        composable("server") { ServerDiscovery() }
         composable("login") { LoginScreen() }
     }
 }
