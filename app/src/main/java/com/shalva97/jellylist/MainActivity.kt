@@ -15,8 +15,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.shalva97.jellylist.ui.theme.JellyListTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kiwi.orbit.compose.ui.controls.TextField
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
