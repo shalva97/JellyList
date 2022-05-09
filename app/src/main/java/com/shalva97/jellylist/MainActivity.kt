@@ -43,10 +43,13 @@ fun JellyList() {
 @Composable
 fun ServerDiscovery() {
 
-    var expanded by remember { mutableStateOf("192.168.") }
+    var server by remember { mutableStateOf("192.168.") }
 
-    Column(modifier = Modifier.fillMaxSize().padding(10.dp), verticalArrangement = Arrangement.Bottom) {
-        TextField(value = expanded, onValueChange = { expanded = it }, label = {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(10.dp),
+        verticalArrangement = Arrangement.Bottom) {
+        TextField(value = server, onValueChange = { server = it }, label = {
             Text(text = "Server")
         }, modifier = Modifier
             .fillMaxWidth(), maxLines = 1)
