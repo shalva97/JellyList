@@ -1,16 +1,15 @@
 package com.shalva97.jellylist
 
-import android.provider.Settings
 import com.shalva97.jellylist.data.JellyFinRepo
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import javax.inject.Inject
 
 /**
@@ -36,12 +35,9 @@ class ExampleUnitTest {
 
     @Test
     fun jellyFin() = runBlocking {
-        val id = Settings.Secure.getString(
-            RuntimeEnvironment.getApplication().contentResolver, Settings.Secure.ANDROID_ID
-        )
-        id
         jellyFin.discoverServers().collect {
-            it
+            println(it.address)
         }
+        delay(5000)
     }
 }

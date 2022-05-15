@@ -1,7 +1,6 @@
 package com.shalva97.jellylist
 
 import android.os.Bundle
-import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
@@ -21,8 +20,6 @@ class MainActivity : ComponentActivity() {
                 JellyList()
             }
         }
-        val id = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-        id
     }
 }
 
