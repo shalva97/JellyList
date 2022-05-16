@@ -16,9 +16,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class JellyListComponents {
+class JellyListModule {
 
     @Provides
+    @Singleton
     fun jellyFinClient(@ApplicationContext appContext: Context): Jellyfin {
         return createJellyfin {
             clientInfo = ClientInfo("JellyList", "1.33.7")

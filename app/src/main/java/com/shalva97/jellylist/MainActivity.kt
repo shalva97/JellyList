@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -20,6 +22,9 @@ import kiwi.orbit.compose.ui.foundation.lightColors
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
             val isSystemInDarkTheme = true
             val systemUiController = rememberSystemUiController()
@@ -27,13 +32,14 @@ class MainActivity : ComponentActivity() {
             OrbitTheme(
                 colors = if (isSystemInDarkTheme) darkColors() else lightColors(),
             ) {
-                val color = OrbitTheme.colors.surface.subtle
-
                 SideEffect {
-                    systemUiController.setSystemBarsColor(color = color)
+                    systemUiController.setSystemBarsColor(
+                        color = Color.Transparent,
+                        darkIcons = isSystemInDarkTheme.not()
+                    )
                 }
 
-                Scaffold {
+                Scaffold() {
                     JellyList()
                 }
             }

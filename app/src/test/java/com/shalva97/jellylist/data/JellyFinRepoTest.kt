@@ -1,6 +1,6 @@
 package com.shalva97.jellylist.data
 
-import com.shalva97.jellylist.data.di.JellyListComponents
+import com.shalva97.jellylist.data.di.JellyListModule
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 @RunWith(RobolectricTestRunner::class)
 @HiltAndroidTest
-@UninstallModules(JellyListComponents::class)
+@UninstallModules(JellyListModule::class)
 class JellyFinRepoTest {
 
     @get:Rule
@@ -50,7 +50,6 @@ class JellyFinRepoTest {
 
         val servers = jellyFinRepo.findRecommendedServer("192.168.88.206")
 
-        servers.forEach { println(it.score) }
         assert(servers.first().score == RecommendedServerInfoScore.GREAT)
     }
 }
