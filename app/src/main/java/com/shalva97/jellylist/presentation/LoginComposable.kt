@@ -24,6 +24,7 @@ fun LoginScreen() {
     val discoveredServer = viewModel.foundServers.collectAsState(initial = emptyList())
 
     Column(modifier = Modifier
+        .systemBarsPadding()
         .fillMaxSize()
         .padding(10.dp),
         verticalArrangement = Arrangement.Bottom) {
