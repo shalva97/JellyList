@@ -10,7 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.Card
+import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.TextField
 
 @Preview(showSystemUi = true)
@@ -36,11 +38,14 @@ fun LoginScreen() {
                 }
             }
         }
-
-        TextField(value = server, onValueChange = { server = it }, label = {
-            Text(text = "Server")
-        }, modifier = Modifier
-            .fillMaxWidth(), maxLines = 1)
+        TextField(value = server,
+            onValueChange = { server = it },
+            label = { Text(text = "Server") },
+            leadingIcon = { Icon(Icons.Trip, contentDescription = null) },
+            modifier = Modifier.fillMaxWidth(),
+            trailingIcon = { Icon(painter = Icons.Close, contentDescription = "Clear") },
+            onTrailingIconClick = { server = "" },
+            maxLines = 1)
 
         Button(onClick = { /*TODO*/ }, modifier = Modifier.align(Alignment.End), enabled = false) {
             Text(text = "Next", modifier = Modifier)

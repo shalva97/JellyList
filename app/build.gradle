@@ -57,7 +57,8 @@ dependencies {
     def hilt = "2.41"
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
-    implementation "kiwi.orbit.compose:ui:0.13.0"
+    implementation "kiwi.orbit.compose:ui:0.14.0"
+    implementation "kiwi.orbit.compose:icons:0.14.0"
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.24.8-beta"
     implementation "androidx.compose.foundation:foundation:$compose_version"
     implementation 'androidx.core:core-ktx:1.7.0'
