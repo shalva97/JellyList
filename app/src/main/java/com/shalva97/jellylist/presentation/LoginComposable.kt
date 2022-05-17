@@ -3,6 +3,7 @@ package com.shalva97.jellylist.presentation
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -24,6 +25,10 @@ fun LoginScreen() {
     var server by remember { mutableStateOf("192.168.") }
 
     val discoveredServer = viewModel.foundServers.collectAsState(initial = emptyList())
+
+    if (viewModel.loading.collectAsState().value) {
+        LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+    }
 
     Column(modifier = Modifier
         .systemBarsPadding()
