@@ -15,7 +15,6 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.shalva97.jellylist.presentation.LoginScreen
 import dagger.hilt.android.AndroidEntryPoint
 import kiwi.orbit.compose.ui.OrbitTheme
-import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.foundation.darkColors
 import kiwi.orbit.compose.ui.foundation.lightColors
 
@@ -39,10 +38,7 @@ class MainActivity : ComponentActivity() {
                         darkIcons = isSystemInDarkTheme.not()
                     )
                 }
-
-                Scaffold {
-                    JellyList()
-                }
+                JellyList()
             }
         }
     }
