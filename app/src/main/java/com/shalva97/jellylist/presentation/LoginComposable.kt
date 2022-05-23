@@ -1,10 +1,14 @@
 package com.shalva97.jellylist.presentation
 
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Button
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -15,6 +19,7 @@ import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TextField
 
+@OptIn(ExperimentalLayoutApi::class)
 @Preview(showSystemUi = true)
 @Composable
 fun LoginScreen() {
@@ -32,6 +37,9 @@ fun LoginScreen() {
     Column(modifier = Modifier
         .systemBarsPadding()
         .fillMaxSize()
+        .imePadding()
+        .imeNestedScroll()
+        .scrollable(rememberScrollState(), Orientation.Vertical)
         .padding(10.dp),
         verticalArrangement = Arrangement.Bottom) {
 
@@ -42,19 +50,19 @@ fun LoginScreen() {
                 }
             }
         }
-        Row {
-            TextField(value = server,
-                onValueChange = { server = it },
-                label = { Text(text = "Server") },
-                leadingIcon = { Icon(Icons.Trip, contentDescription = null) },
-                trailingIcon = { Icon(painter = Icons.Close, contentDescription = "Clear") },
-                onTrailingIconClick = { server = "" },
-                maxLines = 1)
 
-            Button(onClick = { /*TODO*/ },
-                enabled = false) {
-                Text(text = "Next", modifier = Modifier)
-            }
+        TextField(value = server,
+            modifier = Modifier.fillMaxWidth(),
+            onValueChange = { server = it },
+            label = { Text(text = "Server") },
+            leadingIcon = { Icon(Icons.Trip, contentDescription = null) },
+            trailingIcon = { Icon(painter = Icons.Close, contentDescription = "Clear") },
+            onTrailingIconClick = { server = "" },
+            maxLines = 1)
+
+        Button(onClick = { /*TODO*/ }, modifier = Modifier.align(Alignment.End), enabled = false) {
+            Text(text = "Next")
         }
+
     }
 }
