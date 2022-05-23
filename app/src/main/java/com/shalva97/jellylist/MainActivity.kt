@@ -3,9 +3,12 @@ package com.shalva97.jellylist
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
@@ -24,7 +27,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
-//        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         setContent {
             val isSystemInDarkTheme = isSystemInDarkTheme()
@@ -39,7 +41,9 @@ class MainActivity : ComponentActivity() {
                         darkIcons = isSystemInDarkTheme.not()
                     )
                 }
-                JellyList()
+                Box(modifier = Modifier.background(color = OrbitTheme.colors.surface.main)) {
+                    JellyList()
+                }
             }
         }
     }
