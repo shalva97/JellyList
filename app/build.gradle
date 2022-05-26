@@ -54,7 +54,7 @@ android {
 
 dependencies {
     def nav_version = "2.4.2"
-    def hilt = "2.41"
+    def hilt = "2.42"
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation "kiwi.orbit.compose:ui:0.14.0"
