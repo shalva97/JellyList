@@ -5,7 +5,6 @@ import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.Button
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -14,10 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import kiwi.orbit.compose.icons.Icons
-import kiwi.orbit.compose.ui.controls.Card
-import kiwi.orbit.compose.ui.controls.Icon
-import kiwi.orbit.compose.ui.controls.Text
-import kiwi.orbit.compose.ui.controls.TextField
+import kiwi.orbit.compose.ui.controls.*
 
 @OptIn(ExperimentalLayoutApi::class)
 @Preview(showSystemUi = true)
@@ -45,7 +41,10 @@ fun LoginScreen() {
 
         LazyColumn {
             items(discoveredServer.value.size) { index ->
-                Card(onClick = { viewModel.connectToServer(discoveredServer.value[index]) }) {
+                Card(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp),
+                    onClick = { viewModel.connectToServer(discoveredServer.value[index]) }) {
                     Text(text = discoveredServer.value[index].address ?: "")
                 }
             }
@@ -60,7 +59,10 @@ fun LoginScreen() {
             onTrailingIconClick = { server = "" },
             maxLines = 1)
 
-        Button(onClick = { /*TODO*/ }, modifier = Modifier.align(Alignment.End), enabled = false) {
+        ButtonPrimary(onClick = { /*TODO*/ },
+            modifier = Modifier
+                .align(Alignment.End)
+                .padding(top = 10.dp)) {
             Text(text = "Next")
         }
 
