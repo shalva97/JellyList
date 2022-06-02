@@ -77,7 +77,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
     testImplementation "io.mockk:mockk:1.12.4"
-    androidTestImplementation "io.mockk:mockk-android:1.12.3"
+    androidTestImplementation "io.mockk:mockk-android:1.12.4"
     implementation("org.jellyfin.sdk:jellyfin-core:1.2.0")
 
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
