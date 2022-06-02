@@ -24,7 +24,7 @@ class JellyFinRepo @Inject constructor(
 
     suspend fun connect(url: String) {
         val server = findRecommendedServer(url)
-
+        server
     }
 
     @VisibleForTesting

@@ -1,4 +1,4 @@
-package com.shalva97.jellylist.presentation
+package com.shalva97.jellylist.presentation.login
 
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
@@ -43,9 +43,10 @@ fun LoginScreen() {
             items(discoveredServer.value.size) { index ->
                 Card(modifier = Modifier
                     .fillMaxWidth()
-                    .padding(10.dp),
+                    .padding(5.dp),
                     onClick = { viewModel.connectToServer(discoveredServer.value[index]) }) {
-                    Text(text = discoveredServer.value[index].address ?: "")
+                    Text(text = discoveredServer.value[index].address ?: "",
+                        modifier = Modifier.padding(5.dp))
                 }
             }
         }

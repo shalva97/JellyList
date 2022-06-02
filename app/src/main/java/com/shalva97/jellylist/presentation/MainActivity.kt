@@ -1,4 +1,4 @@
-package com.shalva97.jellylist
+package com.shalva97.jellylist.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,7 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.shalva97.jellylist.presentation.LoginScreen
+import com.shalva97.jellylist.presentation.login.LoginScreen
 import dagger.hilt.android.AndroidEntryPoint
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.darkColors

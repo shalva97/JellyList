@@ -1,4 +1,4 @@
-package com.shalva97.jellylist.presentation
+package com.shalva97.jellylist.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
