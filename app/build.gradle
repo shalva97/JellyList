@@ -54,7 +54,7 @@ android {
 
 dependencies {
     def nav_version = "2.4.2"
-    def hilt = "2.41"
+    def hilt = "2.42"
 
     // Test rules and transitive dependencies:
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
