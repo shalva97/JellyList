@@ -7,7 +7,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -24,8 +25,6 @@ import kiwi.orbit.compose.ui.controls.*
 fun LoginScreen() {
 
     val viewModel: LoginScreenViewModel = hiltViewModel()
-
-    var server by remember { mutableStateOf("192.168.") }
 
     val discoveredServer = viewModel.foundServers.collectAsState(initial = emptyList())
     val errors = viewModel.errors.collectAsState()
@@ -60,13 +59,13 @@ fun LoginScreen() {
             }
         }
 
-        TextField(value = server,
+        TextField(value = viewModel.server.value,
             modifier = Modifier.fillMaxWidth(),
-            onValueChange = { server = it; viewModel.clearError() },
+            onValueChange = { viewModel.server.value = it; viewModel.clearError() },
             label = { Text(text = "Server") },
             leadingIcon = { Icon(Icons.Trip, contentDescription = null) },
             trailingIcon = { Icon(painter = Icons.Close, contentDescription = "Clear") },
-            onTrailingIconClick = { server = "" },
+            onTrailingIconClick = { viewModel.server.value = ""; viewModel.clearError() },
             error = if (errors.value is Errors.BadServer) {
                 @Composable { Text(text = "Can not connect to this server") }
             } else {
@@ -74,7 +73,9 @@ fun LoginScreen() {
             },
             maxLines = 1)
 
-        ButtonPrimary(onClick = { /*TODO*/ },
+        ButtonPrimary(onClick = {
+            viewModel.connectToServer()
+        },
             modifier = Modifier
                 .align(Alignment.End)
                 .padding(top = 10.dp)) {
