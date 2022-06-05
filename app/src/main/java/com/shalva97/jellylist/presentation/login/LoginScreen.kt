@@ -1,5 +1,6 @@
 package com.shalva97.jellylist.presentation.login
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
@@ -9,10 +10,12 @@ import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import kiwi.orbit.compose.icons.Icons
+import kiwi.orbit.compose.illustrations.R.drawable
 import kiwi.orbit.compose.ui.controls.*
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -25,10 +28,14 @@ fun LoginScreen() {
     var server by remember { mutableStateOf("192.168.") }
 
     val discoveredServer = viewModel.foundServers.collectAsState(initial = emptyList())
+    val errors = viewModel.errors.collectAsState()
 
     if (viewModel.loading.collectAsState().value) {
         LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
     }
+
+    Image(painter = painterResource(id = drawable.il_orbit_compass_points),
+        contentDescription = null, modifier = Modifier.fillMaxWidth().padding(top = 150.dp))
 
     Column(modifier = Modifier
         .systemBarsPadding()
@@ -53,11 +60,16 @@ fun LoginScreen() {
 
         TextField(value = server,
             modifier = Modifier.fillMaxWidth(),
-            onValueChange = { server = it },
+            onValueChange = { server = it; viewModel.clearError() },
             label = { Text(text = "Server") },
             leadingIcon = { Icon(Icons.Trip, contentDescription = null) },
             trailingIcon = { Icon(painter = Icons.Close, contentDescription = "Clear") },
             onTrailingIconClick = { server = "" },
+            error = if (errors.value is Errors.BadServer) {
+                @Composable { Text(text = "Can not connect to this server") }
+            } else {
+                null
+            },
             maxLines = 1)
 
         ButtonPrimary(onClick = { /*TODO*/ },

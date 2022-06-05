@@ -3,10 +3,11 @@ package com.shalva97.jellylist.presentation.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shalva97.jellylist.data.JellyFinRepo
+import com.shalva97.jellylist.domain.JellyFinServer
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.jellyfin.sdk.model.api.ServerDiscoveryInfo
 import javax.inject.Inject
@@ -16,16 +17,18 @@ class LoginScreenViewModel @Inject constructor(
     private val jellyFinClient: JellyFinRepo,
 ) : ViewModel() {
 
-//    val foundServers = jellyFinClient.discoverServers()
-//        .runningFold(emptyList<ServerDiscoveryInfo>()) { accumulator, value -> accumulator + value }
-//        .flowOn(Dispatchers.IO)
+    val foundServers1 = jellyFinClient.discoverServers()
+        .runningFold(emptyList<JellyFinServer>()) { accumulator, value -> accumulator + value }
+        .flowOn(Dispatchers.IO)
+
+    val errors = MutableStateFlow<Errors>(Errors.NoErrors)
 
     val foundServers = flowOf(
         listOf(
-            ServerDiscoveryInfo("12312 12312 12 3"),
-            ServerDiscoveryInfo("12312 12312 12 3"),
-            ServerDiscoveryInfo("12312 12312 12 3"),
-            ServerDiscoveryInfo("12312 12312 12 3"),
+            JellyFinServer("12312 12312 12 3"),
+            JellyFinServer("12312 12312 12 3"),
+            JellyFinServer("12312 12312 12 3"),
+            JellyFinServer("12312 12312 12 3"),
         ))
 
     val loading = MutableStateFlow<Boolean>(false)
@@ -34,7 +37,21 @@ class LoginScreenViewModel @Inject constructor(
         jellyFinClient.discoverServers()
     }
 
-    fun connectToServer(serverDiscoveryInfo: ServerDiscoveryInfo) = viewModelScope.launch {
-        jellyFinClient.connect(serverDiscoveryInfo.address ?: return@launch)
+    fun connectToServer(jellyFinServer: JellyFinServer) =
+        viewModelScope.launch(exceptionHandler) {
+            jellyFinClient.connect(jellyFinServer.address)
+        }
+
+    fun clearError() {
+        errors.tryEmit(Errors.NoErrors)
     }
+
+    private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+        errors.tryEmit(Errors.BadServer)
+    }
+}
+
+sealed class Errors {
+    object BadServer: Errors()
+    object NoErrors: Errors()
 }

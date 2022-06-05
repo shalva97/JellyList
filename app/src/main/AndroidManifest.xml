@@ -14,7 +14,7 @@
         android:name=".App"
         android:theme="@style/Theme.JellyList">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.MainActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>
