@@ -34,8 +34,10 @@ fun LoginScreen() {
         LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
     }
 
-    Image(painter = painterResource(id = drawable.il_orbit_compass_points),
-        contentDescription = null, modifier = Modifier.fillMaxWidth().padding(top = 150.dp))
+    Image(painter = painterResource(id = drawable.il_orbit_compass_save_on_booking),
+        contentDescription = null, modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 150.dp))
 
     Column(modifier = Modifier
         .systemBarsPadding()
