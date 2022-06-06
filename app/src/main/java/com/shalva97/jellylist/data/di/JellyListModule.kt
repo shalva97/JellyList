@@ -11,7 +11,6 @@ import kotlinx.coroutines.Dispatchers
 import org.jellyfin.sdk.Jellyfin
 import org.jellyfin.sdk.createJellyfin
 import org.jellyfin.sdk.model.ClientInfo
-import org.jellyfin.sdk.model.DeviceInfo
 import javax.inject.Singleton
 
 @Module
@@ -22,8 +21,7 @@ class JellyListModule {
     @Singleton
     fun jellyFinClient(@ApplicationContext appContext: Context): Jellyfin {
         return createJellyfin {
-            clientInfo = ClientInfo("JellyList", "1.33.7")
-            deviceInfo = DeviceInfo("123", "Xuiaomi")
+            clientInfo = ClientInfo("JellyList", "0.1")
             context = appContext
         }
     }

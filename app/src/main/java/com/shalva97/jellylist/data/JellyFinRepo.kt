@@ -26,14 +26,17 @@ class JellyFinRepo @Inject constructor(
 
     suspend fun connect(url: String): RecommendedServerInfo {
         val server = findRecommendedServer(url)
+
+
         return TODO()
     }
 
     suspend fun findRecommendedServer(url: String): JellyFinServer {
-        val server = jellyFin.discovery.getRecommendedServers(url)
+        val candidates = jellyFin.discovery.getAddressCandidates(url)
+        val server = jellyFin.discovery.getRecommendedServers(candidates)
             .toList().sortedBy { it.score.ordinal }
 
-        if (server.all { it.score == RecommendedServerInfoScore.BAD } ) {
+        if (server.all { it.score == RecommendedServerInfoScore.BAD }) {
             throw Exception("No Server found")
         } else {
             return server.first().toDomainModel()
