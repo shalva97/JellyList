@@ -23,28 +23,26 @@ class LoginScreenViewModel @Inject constructor(
         .runningFold(emptyList<JellyFinServer>()) { accumulator, value -> accumulator + value }
         .flowOn(Dispatchers.IO)
     val server = mutableStateOf("192.168.")
-
-    val errors = MutableStateFlow<Errors>(Errors.NoErrors)
-
+    val errors = mutableStateOf<Errors>(Errors.NoErrors)
     val loading = MutableStateFlow(false)
 
     fun connectToServer(jellyFinServer: JellyFinServer) =
         viewModelScope.launch(exceptionHandler) {
             server.value = jellyFinServer.address
-            jellyFinClient.connect(jellyFinServer.address)
+            jellyFinClient.findRecommendedServer(jellyFinServer.address)
         }
 
     fun clearError() {
-        errors.tryEmit(Errors.NoErrors)
+        errors.value = Errors.NoErrors
     }
 
     fun connectToServer() =
         viewModelScope.launch(exceptionHandler) {
-            jellyFinClient.connect(server.value)
+            jellyFinClient.findRecommendedServer(server.value)
         }
 
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
-        errors.tryEmit(Errors.BadServer)
+        errors.value = Errors.BadServer
     }
 }
 

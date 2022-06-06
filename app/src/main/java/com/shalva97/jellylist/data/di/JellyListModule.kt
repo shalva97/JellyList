@@ -9,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.jellyfin.sdk.Jellyfin
+import org.jellyfin.sdk.api.client.ApiClient
 import org.jellyfin.sdk.createJellyfin
 import org.jellyfin.sdk.model.ClientInfo
 import javax.inject.Singleton
@@ -24,6 +25,12 @@ class JellyListModule {
             clientInfo = ClientInfo("JellyList", "0.1")
             context = appContext
         }
+    }
+
+    @Provides
+    @Singleton
+    fun jellyFinApi(jellyFin: Jellyfin): ApiClient {
+        return jellyFin.createApi()
     }
 
     @Provides

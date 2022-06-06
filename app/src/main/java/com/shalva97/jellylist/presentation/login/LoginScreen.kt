@@ -30,7 +30,7 @@ fun LoginScreen() {
     val viewModel: LoginScreenViewModel = hiltViewModel()
 
     val discoveredServer = viewModel.foundServers.collectAsState(initial = emptyList())
-    val errors = viewModel.errors.collectAsState()
+    val errors = viewModel.errors
 
     if (viewModel.loading.collectAsState().value) {
         LinearProgressIndicator(modifier = Modifier.fillMaxWidth())

@@ -16,19 +16,8 @@ class JellyFinRepo @Inject constructor(
     private val jellyFin: Jellyfin,
 ) {
 
-    private val jellyFinAPIClient by lazy {
-        jellyFin.createApi()
-    }
-
     fun discoverServers(): Flow<JellyFinServer> {
         return jellyFin.discovery.discoverLocalServers().map { it.toDomainModel() }
-    }
-
-    suspend fun connect(url: String): RecommendedServerInfo {
-        val server = findRecommendedServer(url)
-
-
-        return TODO()
     }
 
     suspend fun findRecommendedServer(url: String): JellyFinServer {
@@ -45,7 +34,7 @@ class JellyFinRepo @Inject constructor(
 }
 
 private fun RecommendedServerInfo.toDomainModel(): JellyFinServer {
-   return JellyFinServer(this)
+    return JellyFinServer(this)
 }
 
 private fun ServerDiscoveryInfo.toDomainModel(): JellyFinServer {
