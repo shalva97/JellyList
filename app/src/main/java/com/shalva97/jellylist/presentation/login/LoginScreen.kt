@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -32,7 +33,7 @@ fun LoginScreen() {
     val discoveredServer = viewModel.foundServers.collectAsState(initial = emptyList())
     val errors = viewModel.errors
 
-    if (viewModel.loading.collectAsState().value) {
+    if (viewModel.loading.value) {
         LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
     }
 
@@ -74,7 +75,9 @@ fun LoginScreen() {
             } else {
                 null
             },
-            keyboardOptions = KeyboardOptions(autoCorrect = false, imeAction = ImeAction.Next),
+            keyboardOptions = KeyboardOptions(autoCorrect = false,
+                imeAction = ImeAction.Next,
+                keyboardType = KeyboardType.Text),
             keyboardActions = KeyboardActions(onNext = {
                 viewModel.connectToServer()
             }),

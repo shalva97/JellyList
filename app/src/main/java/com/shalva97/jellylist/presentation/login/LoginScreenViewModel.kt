@@ -8,7 +8,6 @@ import com.shalva97.jellylist.domain.JellyFinServer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.runningFold
 import kotlinx.coroutines.launch
@@ -24,7 +23,7 @@ class LoginScreenViewModel @Inject constructor(
         .flowOn(Dispatchers.IO)
     val server = mutableStateOf("192.168.")
     val errors = mutableStateOf<Errors>(Errors.NoErrors)
-    val loading = MutableStateFlow(false)
+    val loading = mutableStateOf(false)
 
     fun connectToServer(jellyFinServer: JellyFinServer) =
         viewModelScope.launch(exceptionHandler) {
