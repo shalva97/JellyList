@@ -1,5 +1,6 @@
 package com.shalva97.jellylist.presentation.login
 
+import android.view.KeyEvent.KEYCODE_ENTER
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -56,7 +58,7 @@ fun LoginScreen() {
                 Card(modifier = Modifier
                     .fillMaxWidth()
                     .padding(5.dp),
-                    onClick = { viewModel.connectToServer(discoveredServer.value[index]) }) {
+                    onClick = { viewModel.onNextButtonClicked(discoveredServer.value[index]) }) {
                     Text(text = discoveredServer.value[index].address ?: "",
                         modifier = Modifier.padding(5.dp))
                 }
@@ -64,33 +66,72 @@ fun LoginScreen() {
         }
 
         TextField(value = viewModel.server.value,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .onKeyEvent {
+                    if (it.nativeKeyEvent.keyCode == KEYCODE_ENTER) {
+                        viewModel.onNextButtonClicked()
+                        return@onKeyEvent true
+                    }
+                    false
+                },
             onValueChange = { viewModel.server.value = it; viewModel.clearError() },
+            enabled = viewModel.showAuthFields.value.not(),
             label = { Text(text = "Server") },
             leadingIcon = { Icon(Icons.Trip, contentDescription = null) },
             trailingIcon = { Icon(painter = Icons.Close, contentDescription = "Clear") },
-            onTrailingIconClick = { viewModel.server.value = ""; viewModel.clearError() },
+            onTrailingIconClick = {
+                viewModel.serverTrailingIconClicked()
+            },
             error = if (errors.value is Errors.BadServer) {
                 @Composable { Text(text = "Can not connect to this server") }
-            } else {
-                null
-            },
+            } else null,
             keyboardOptions = KeyboardOptions(autoCorrect = false,
                 imeAction = ImeAction.Next,
-                keyboardType = KeyboardType.Text),
+                keyboardType = KeyboardType.Password),
             keyboardActions = KeyboardActions(onNext = {
-                viewModel.connectToServer()
+                viewModel.onNextButtonClicked()
             }),
             maxLines = 1)
 
-        ButtonPrimary(onClick = {
-            viewModel.connectToServer()
-        },
-            modifier = Modifier
-                .align(Alignment.End)
-                .padding(top = 10.dp)) {
-            Text(text = "Next")
+        if (viewModel.showAuthFields.value) {
+            TextField(modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp),
+                label = { Text(text = "Login") },
+                value = viewModel.authDetails.username.value,
+                onValueChange = { viewModel.authDetails.username.value = it },
+                leadingIcon = {
+                    Icon(painter = Icons.AccountCircle, contentDescription = "profile icon")
+                })
+            PasswordTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp),
+                leadingIcon = { Icon(Icons.Security, contentDescription = null) },
+                label = { Text(text = "Password") },
+                value = viewModel.authDetails.password.value,
+                onValueChange = { viewModel.authDetails.password.value = it },
+            )
         }
+
+        Row(modifier = Modifier
+            .align(Alignment.End)
+            .padding(top = 10.dp)
+            .fillMaxWidth(),
+            horizontalArrangement = Arrangement.End) {
+            ButtonSecondary(modifier = Modifier.padding(end = 10.dp), onClick = { /*TODO*/ }) {
+                Text(text = "Discover")
+            }
+            ButtonPrimary(
+                onClick = {
+                    viewModel.onNextButtonClicked()
+                },
+            ) {
+                Text(text = "Next")
+            }
+        }
+
 
     }
 }
