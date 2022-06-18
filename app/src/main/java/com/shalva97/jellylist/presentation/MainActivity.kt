@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.shalva97.jellylist.presentation.home.Home
 import com.shalva97.jellylist.presentation.login.LoginScreen
 import dagger.hilt.android.AndroidEntryPoint
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -53,7 +55,14 @@ class MainActivity : ComponentActivity() {
 fun JellyList() {
     val navController = rememberNavController()
 
+    LaunchedEffect(key1 = "nav", block = {
+        navigation.collect {
+            navController.navigate(it)
+        }
+    })
+
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginScreen() }
+        composable("home") { Home() }
     }
 }

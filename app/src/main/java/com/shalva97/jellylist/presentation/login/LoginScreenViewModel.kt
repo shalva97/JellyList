@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.shalva97.jellylist.data.JellyFinApiClientRepo
 import com.shalva97.jellylist.data.JellyFinRepo
 import com.shalva97.jellylist.domain.JellyFinServer
+import com.shalva97.jellylist.presentation.navigation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -52,6 +53,7 @@ class LoginScreenViewModel @Inject constructor(
             username = authDetails.username.value,
             password = authDetails.password.value,
         )
+        navigation.tryEmit("home")
     }
 
     fun serverTrailingIconClicked() {
