@@ -56,9 +56,7 @@ dependencies {
     def nav_version = "2.4.2"
     def hilt = "2.42"
 
-    // Test rules and transitive dependencies:
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
-// Needed for createComposeRule, but not createAndroidComposeRule:
     debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
     androidTestImplementation 'androidx.test:core-ktx:1.4.0'
 
