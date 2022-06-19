@@ -34,6 +34,7 @@ fun LoginScreen() {
 
     val discoveredServer = viewModel.foundServers.collectAsState(initial = emptyList())
     val errors = viewModel.errors
+    val previousServers = viewModel.previousServers.collectAsState(initial = emptyList())
 
     if (viewModel.loading.value) {
         LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
@@ -55,14 +56,28 @@ fun LoginScreen() {
 
         LazyColumn {
             items(discoveredServer.value.size) { index ->
-                Card(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(5.dp),
-                    onClick = { viewModel.onNextButtonClicked(discoveredServer.value[index]) }) {
-                    Text(text = discoveredServer.value[index].address ?: "",
+                if (index == 0) {
+                    Text(text = "Discovered")
+                }
+                ListChoice(onClick = {
+                    viewModel.onDiscoveredServerClicked(discoveredServer.value[index])
+                }) {
+                    Text(text = discoveredServer.value[index].address,
                         modifier = Modifier.padding(5.dp))
                 }
             }
+
+            items(previousServers.value.size) { index ->
+                if (index == 0) {
+                    Text(text = "Recent Servers")
+                }
+                ListChoice(onClick = {
+                    viewModel.onRecentServerClicked(previousServers.value.elementAt(index))
+                }) {
+                    Text(text = previousServers.value.elementAt(index))
+                }
+            }
+
         }
 
         TextField(value = viewModel.server.value,

@@ -61,7 +61,7 @@ fun JellyList() {
         }
     })
 
-    NavHost(navController = navController, startDestination = "login") {
+    NavHost(navController = navController, startDestination = "home") {
         composable("login") { LoginScreen() }
         composable("home") { Home() }
     }

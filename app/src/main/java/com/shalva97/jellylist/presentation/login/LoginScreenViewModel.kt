@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shalva97.jellylist.data.JellyFinApiClientRepo
 import com.shalva97.jellylist.data.JellyFinRepo
+import com.shalva97.jellylist.data.RecentServersRepo
 import com.shalva97.jellylist.domain.JellyFinServer
 import com.shalva97.jellylist.presentation.navigation
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,21 +21,18 @@ import javax.inject.Inject
 class LoginScreenViewModel @Inject constructor(
     private val jellyFinClient: JellyFinRepo,
     private val jellyFinApiClient: JellyFinApiClientRepo,
+    private val recentServersRepo: RecentServersRepo,
 ) : ViewModel() {
 
     val foundServers = jellyFinClient.discoverServers()
         .runningFold(emptyList<JellyFinServer>()) { accumulator, value -> accumulator + value }
         .flowOn(Dispatchers.IO)
+    val previousServers = recentServersRepo.servers
     val server = mutableStateOf("192.168.")
     val errors = mutableStateOf<Errors>(Errors.NoErrors)
     val showAuthFields = mutableStateOf(false)
     val loading = mutableStateOf(false)
     val authDetails = AuthDetails()
-
-    fun onNextButtonClicked(jellyFinServer: JellyFinServer) {
-        server.value = jellyFinServer.address
-        connectToServer(jellyFinServer.address)
-    }
 
     fun clearError() {
         errors.value = Errors.NoErrors
@@ -67,9 +65,20 @@ class LoginScreenViewModel @Inject constructor(
         val recommendedServer = jellyFinClient.findRecommendedServer(jellyFinServer)
         jellyFinApiClient.baseUrl = recommendedServer.address
         showAuthFields.value = true
+        recentServersRepo.saveServer(recommendedServer.address)
     }
 
-    private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+    fun onRecentServerClicked(url: String) {
+        server.value = url
+        connectToServer(url)
+    }
+
+    fun onDiscoveredServerClicked(jellyFinServer: JellyFinServer) {
+        server.value = jellyFinServer.address
+        connectToServer(jellyFinServer.address)
+    }
+
+    private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
         errors.value = Errors.BadServer
     }
 }
