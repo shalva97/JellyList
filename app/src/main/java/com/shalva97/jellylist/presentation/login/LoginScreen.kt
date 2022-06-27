@@ -25,7 +25,7 @@ import androidx.navigation.NavHostController
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.illustrations.R.drawable
 import kiwi.orbit.compose.ui.controls.*
-import kotlinx.coroutines.channels.consume
+import kotlinx.coroutines.channels.consumeEach
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -33,9 +33,9 @@ fun LoginScreen(navController: NavHostController) {
 
     val viewModel: LoginScreenViewModel = hiltViewModel()
 
-    LaunchedEffect(key1 = "nav") {
-        viewModel.navigateToHome.consume {
-            navController.popBackStack("Home", true)
+    LaunchedEffect(key1 = "navv") {
+        viewModel.navigateToHome.consumeEach {
+            navController.popBackStack("home", true)
         }
     }
 

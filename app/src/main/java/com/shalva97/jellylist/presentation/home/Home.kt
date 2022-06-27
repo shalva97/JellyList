@@ -30,7 +30,7 @@ fun Home(navController: NavHostController) {
         .systemBarsPadding()) {
 
         movies.value.forEach {
-            Text(text = it.originalTitle!!)
+            Text(text = it.originalTitle ?: "asdf")
         }
     }
 }
