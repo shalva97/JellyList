@@ -11,6 +11,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,19 +19,25 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.illustrations.R.drawable
 import kiwi.orbit.compose.ui.controls.*
+import kotlinx.coroutines.channels.consume
 
 @OptIn(ExperimentalLayoutApi::class)
-@Preview(showSystemUi = true)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavHostController) {
 
     val viewModel: LoginScreenViewModel = hiltViewModel()
+
+    LaunchedEffect(key1 = "nav") {
+        viewModel.navigateToHome.consume {
+            navController.popBackStack("Home", true)
+        }
+    }
 
     val discoveredServer = viewModel.foundServers.collectAsState(initial = emptyList())
     val errors = viewModel.errors

@@ -8,10 +8,10 @@ import com.shalva97.jellylist.data.JellyFinApiClientRepo
 import com.shalva97.jellylist.data.JellyFinRepo
 import com.shalva97.jellylist.data.RecentServersRepo
 import com.shalva97.jellylist.domain.JellyFinServer
-import com.shalva97.jellylist.presentation.navigation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.runningFold
 import kotlinx.coroutines.launch
@@ -33,6 +33,7 @@ class LoginScreenViewModel @Inject constructor(
     val showAuthFields = mutableStateOf(false)
     val loading = mutableStateOf(false)
     val authDetails = AuthDetails()
+    val navigateToHome = Channel<Unit>()
 
     fun clearError() {
         errors.value = Errors.NoErrors
@@ -51,7 +52,7 @@ class LoginScreenViewModel @Inject constructor(
             username = authDetails.username.value,
             password = authDetails.password.value,
         )
-        navigation.tryEmit("home")
+        navigateToHome.trySend(Unit)
     }
 
     fun serverTrailingIconClicked() {
