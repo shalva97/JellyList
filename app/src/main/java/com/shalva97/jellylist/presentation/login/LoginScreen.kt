@@ -21,7 +21,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.illustrations.R.drawable
 import kiwi.orbit.compose.ui.controls.*
@@ -29,13 +28,13 @@ import kotlinx.coroutines.channels.consumeEach
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun LoginScreen(navController: NavHostController) {
+fun LoginScreen(backToHome: () -> Boolean) {
 
     val viewModel: LoginScreenViewModel = hiltViewModel()
 
     LaunchedEffect(key1 = "navv") {
         viewModel.navigateToHome.consumeEach {
-            navController.popBackStack("home", true)
+            backToHome.invoke()
         }
     }
 
