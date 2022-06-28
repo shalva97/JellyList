@@ -8,18 +8,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import kotlinx.coroutines.channels.consume
 
 @Composable
-fun Home(navController: NavHostController) {
+@Preview
+fun Home(navigateToHome: () -> Unit = { }) {
 
     val viewModel = hiltViewModel<HomeViewModel>()
 
     LaunchedEffect(key1 = "nav") {
         viewModel.navigateToLogin.consume {
-            navController.navigate("login")
+            navigateToHome.invoke()
         }
     }
 
