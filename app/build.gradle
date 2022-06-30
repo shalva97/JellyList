@@ -61,7 +61,7 @@ dependencies {
     androidTestImplementation 'androidx.test:core-ktx:1.4.0'
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
-    implementation "kiwi.orbit.compose:ui:0.15.1"
+    implementation "kiwi.orbit.compose:ui:0.16.0"
     implementation "kiwi.orbit.compose:icons:0.16.0"
     implementation "kiwi.orbit.compose:illustrations:0.16.0"
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.24.8-beta"
