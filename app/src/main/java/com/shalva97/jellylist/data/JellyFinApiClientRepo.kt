@@ -14,6 +14,7 @@ import org.jellyfin.sdk.api.client.ApiClient
 import org.jellyfin.sdk.api.client.extensions.authenticateUserByName
 import org.jellyfin.sdk.api.client.extensions.userApi
 import org.jellyfin.sdk.api.client.extensions.userLibraryApi
+import org.jellyfin.sdk.api.client.extensions.videosApi
 import org.jellyfin.sdk.model.api.BaseItemDto
 import org.jellyfin.sdk.model.api.UserDto
 import java.util.*
@@ -47,8 +48,10 @@ class JellyFinApiClientRepo @Inject constructor(
         apiClient.baseUrl = savedCredentials.third
     }
 
-    suspend fun fetchListOfAvailableUsers(): List<User> {
-        return apiClient.userApi.getUsers().content.map { it.toDomainModel() }
+    suspend fun getItemInfo(itemId: UUID): String {
+        val item = apiClient.userLibraryApi.getItem(itemId = itemId)
+        return apiClient.videosApi.getVideoStreamUrl(itemId,
+            mediaSourceId = item.content.mediaSources!!.first().id, static = true)
     }
 
     suspend fun authenticate(password: String, username: String) {

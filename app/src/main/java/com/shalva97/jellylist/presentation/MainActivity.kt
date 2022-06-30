@@ -57,7 +57,7 @@ fun JellyList() {
     NavHost(navController = navController, startDestination = "home") {
         composable("login") { LoginScreen { navController.popBackStack("home", inclusive = true) } }
         composable("home") {
-            Home { navController.navigate("navigate") }
+            Home { navController.navigate("login") }
         }
     }
 }

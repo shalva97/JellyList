@@ -3,6 +3,8 @@ package com.shalva97.jellylist.presentation.home
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -10,17 +12,18 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import kotlinx.coroutines.channels.consume
+import kiwi.orbit.compose.ui.controls.ListChoice
+import kotlinx.coroutines.channels.consumeEach
 
 @Composable
 @Preview
-fun Home(navigateToHome: () -> Unit = { }) {
+fun Home(navigateToLogin: () -> Unit = { }) {
 
     val viewModel = hiltViewModel<HomeViewModel>()
 
     LaunchedEffect(key1 = "nav") {
-        viewModel.navigateToLogin.consume {
-            navigateToHome.invoke()
+        viewModel.navigateToLogin.consumeEach {
+            navigateToLogin.invoke()
         }
     }
 
@@ -28,10 +31,13 @@ fun Home(navigateToHome: () -> Unit = { }) {
 
     Column(modifier = Modifier
         .fillMaxSize()
+        .verticalScroll(rememberScrollState())
         .systemBarsPadding()) {
 
         movies.value.forEach {
-            Text(text = it.originalTitle ?: "asdf")
+            ListChoice(onClick = { viewModel.openVideoByExternalApp(it) }) {
+                Text(text = it.name ?: "Unknown")
+            }
         }
     }
 }

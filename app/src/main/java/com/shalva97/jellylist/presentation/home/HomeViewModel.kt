@@ -1,30 +1,35 @@
 package com.shalva97.jellylist.presentation.home
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shalva97.jellylist.data.JellyFinApiClientRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.jellyfin.sdk.model.api.BaseItemDto
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val jellyFinApiClient: JellyFinApiClientRepo,
+    @ApplicationContext private val context: Context,
 ) : ViewModel() {
 
-    val movies = MutableSharedFlow<List<BaseItemDto>>()
+    val movies = MutableStateFlow<List<BaseItemDto>>(emptyList())
     val navigateToLogin = Channel<Unit>()
 
     private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is IllegalArgumentException -> {
+                runBlocking { delay(500) }
                 navigateToLogin.trySend(Unit)
             }
+            else -> exception.printStackTrace()
         }
     }
 
@@ -35,4 +40,13 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun openVideoByExternalApp(video: BaseItemDto) = viewModelScope.launch(Dispatchers.IO) {
+        val streamUrl = jellyFinApiClient.getItemInfo(video.id)
+
+        val uri = Uri.parse(streamUrl)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.setDataAndType(uri, "audio/video")
+        context.startActivity(intent)
+    }
 }
