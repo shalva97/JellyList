@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -60,25 +61,23 @@ fun LoginScreen(backToHome: () -> Boolean) {
         .padding(10.dp),
         verticalArrangement = Arrangement.Bottom) {
 
+        Text(text = "Servers", fontWeight = FontWeight.SemiBold)
         LazyColumn {
             items(discoveredServer.value.size) { index ->
-                if (index == 0) {
-                    Text(text = "Discovered")
-                }
                 ListChoice(onClick = {
                     viewModel.onDiscoveredServerClicked(discoveredServer.value[index])
+                }, description = {
+                    Text(text = "Discovered")
                 }) {
-                    Text(text = discoveredServer.value[index].address,
-                        modifier = Modifier.padding(5.dp))
+                    Text(text = discoveredServer.value[index].address)
                 }
             }
 
             items(previousServers.value.size) { index ->
-                if (index == 0) {
-                    Text(text = "Recent Servers")
-                }
                 ListChoice(onClick = {
                     viewModel.onRecentServerClicked(previousServers.value.elementAt(index))
+                }, description = {
+                    Text(text = "Recent")
                 }) {
                     Text(text = previousServers.value.elementAt(index))
                 }
@@ -118,7 +117,7 @@ fun LoginScreen(backToHome: () -> Boolean) {
         if (viewModel.showAuthFields.value) {
             TextField(modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 10.dp),
+                .padding(top = 20.dp),
                 label = { Text(text = "Login") },
                 value = viewModel.authDetails.username.value,
                 onValueChange = { viewModel.authDetails.username.value = it },
