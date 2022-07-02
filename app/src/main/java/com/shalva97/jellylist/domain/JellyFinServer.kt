@@ -8,5 +8,5 @@ class JellyFinServer(val address: String) {
         address = serverDiscoveryInfo.address
     )
 
-    constructor(serverDiscoveryInfo: ServerDiscoveryInfo) : this(serverDiscoveryInfo.address!!)
+    constructor(serverDiscoveryInfo: ServerDiscoveryInfo) : this(serverDiscoveryInfo.address)
 }
