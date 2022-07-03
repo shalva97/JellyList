@@ -61,28 +61,31 @@ fun LoginScreen(backToHome: () -> Boolean) {
         .padding(10.dp),
         verticalArrangement = Arrangement.Bottom) {
 
-        Text(text = "Servers", fontWeight = FontWeight.SemiBold)
-        LazyColumn {
-            items(discoveredServer.value.size) { index ->
-                ListChoice(onClick = {
-                    viewModel.onDiscoveredServerClicked(discoveredServer.value[index])
-                }, description = {
-                    Text(text = "Discovered")
-                }) {
-                    Text(text = discoveredServer.value[index].address)
-                }
-            }
+        if (discoveredServer.value.isNotEmpty() && previousServers.value.isNotEmpty()) {
+            Text(text = "Servers", fontWeight = FontWeight.SemiBold)
 
-            items(previousServers.value.size) { index ->
-                ListChoice(onClick = {
-                    viewModel.onRecentServerClicked(previousServers.value.elementAt(index))
-                }, description = {
-                    Text(text = "Recent")
-                }) {
-                    Text(text = previousServers.value.elementAt(index))
+            LazyColumn {
+                items(discoveredServer.value.size) { index ->
+                    ListChoice(onClick = {
+                        viewModel.onDiscoveredServerClicked(discoveredServer.value[index])
+                    }, description = {
+                        Text(text = "Discovered")
+                    }) {
+                        Text(text = discoveredServer.value[index].address)
+                    }
                 }
-            }
 
+                items(previousServers.value.size) { index ->
+                    ListChoice(onClick = {
+                        viewModel.onRecentServerClicked(previousServers.value.elementAt(index))
+                    }, description = {
+                        Text(text = "Recent")
+                    }) {
+                        Text(text = previousServers.value.elementAt(index))
+                    }
+                }
+
+            }
         }
 
         TextField(value = viewModel.server.value,
