@@ -50,6 +50,7 @@ android {
             includeAndroidResources = true
         }
     }
+    namespace 'com.shalva97.jellylist'
 }
 
 dependencies {
