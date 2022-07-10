@@ -12,6 +12,8 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "JellyList"
 include ':app'
-include ':jellyfin'
+include ':libraries:jellyfin'
+include ':features:cli'

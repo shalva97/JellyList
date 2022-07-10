@@ -19,3 +19,7 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    koin_version = "3.2.0"
+}
