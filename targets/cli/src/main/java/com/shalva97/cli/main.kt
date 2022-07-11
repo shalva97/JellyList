@@ -17,7 +17,6 @@ fun main() = runBlocking {
     servers.forEach {
         println(it)
     }
-    println(servers)
 
     println("hello cli client")
 }
