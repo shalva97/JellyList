@@ -10,6 +10,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.mapNotNull
 import javax.inject.Inject
 
+// TODO move this to recent_server module
 class RecentServersRepo @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {

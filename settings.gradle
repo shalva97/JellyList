@@ -18,3 +18,4 @@ include ':app'
 include ':cli'
 
 include ':libraries:jellyfin'
+include ':libraries:recent_servers'
