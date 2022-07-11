@@ -1,9 +1,9 @@
-package com.shalva97.jellylist.domain
+package models
 
 import org.jellyfin.sdk.discovery.RecommendedServerInfo
 import org.jellyfin.sdk.model.api.ServerDiscoveryInfo
 
-class JellyFinServer(val address: String) {
+data class JellyFinServer(val address: String) {
     constructor(serverDiscoveryInfo: RecommendedServerInfo) : this(
         address = serverDiscoveryInfo.address
     )

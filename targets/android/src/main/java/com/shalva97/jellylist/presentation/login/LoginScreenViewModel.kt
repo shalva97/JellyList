@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.shalva97.jellylist.data.JellyFinApiClientRepo
 import com.shalva97.jellylist.data.JellyFinRepo
 import com.shalva97.jellylist.data.RecentServersRepo
-import com.shalva97.jellylist.domain.JellyFinServer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
