@@ -1,6 +1,5 @@
 package data
 
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import models.JellyFinServer
@@ -13,8 +12,9 @@ class JellyFinRepo constructor(
     private val jellyFin: Jellyfin,
 ) {
 
-    fun discoverServers(): Flow<JellyFinServer> {
+    suspend fun discoverServers(): List<JellyFinServer> {
         return jellyFin.discovery.discoverLocalServers().map { it.toDomainModel() }
+            .toList(mutableListOf())
     }
 
     suspend fun findRecommendedServer(url: String): JellyFinServer {
