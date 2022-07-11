@@ -14,6 +14,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "JellyList"
-include ':app'
+include ':targets:app'
+include ':targets:cli'
+
 include ':libraries:jellyfin'
-include ':features:cli'
