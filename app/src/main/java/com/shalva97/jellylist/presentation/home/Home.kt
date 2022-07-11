@@ -11,15 +11,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
 import kiwi.orbit.compose.ui.controls.ListChoice
 import kotlinx.coroutines.channels.consumeEach
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 @Preview
 fun Home(navigateToLogin: () -> Unit = { }) {
 
-    val viewModel = hiltViewModel<HomeViewModel>()
+    val viewModel = koinViewModel<HomeViewModel>()
 
     LaunchedEffect(key1 = "nav") {
         viewModel.navigateToLogin.consumeEach {

@@ -7,7 +7,6 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.shalva97.jellylist.domain.User
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import org.jellyfin.sdk.api.client.ApiClient
@@ -18,13 +17,10 @@ import org.jellyfin.sdk.api.client.extensions.videosApi
 import org.jellyfin.sdk.model.api.BaseItemDto
 import org.jellyfin.sdk.model.api.UserDto
 import java.util.*
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class JellyFinApiClientRepo @Inject constructor(
+class JellyFinApiClientRepo constructor(
     private val apiClient: ApiClient,
-    @ApplicationContext val context: Context,
+    private val context: Context,
 ) {
     var baseUrl: String? = null
         get() = apiClient.baseUrl

@@ -5,27 +5,24 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shalva97.jellylist.data.JellyFinApiClientRepo
-import com.shalva97.jellylist.data.JellyFinRepo
 import com.shalva97.jellylist.data.RecentServersRepo
-import dagger.hilt.android.lifecycle.HiltViewModel
+import data.JellyFinRepo
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.runningFold
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import models.JellyFinServer
 
-@HiltViewModel
-class LoginScreenViewModel @Inject constructor(
+class LoginScreenViewModel constructor(
     private val jellyFinClient: JellyFinRepo,
     private val jellyFinApiClient: JellyFinApiClientRepo,
     private val recentServersRepo: RecentServersRepo,
 ) : ViewModel() {
 
-    val foundServers = jellyFinClient.discoverServers()
-        .runningFold(emptyList<JellyFinServer>()) { accumulator, value -> accumulator + value }
-        .flowOn(Dispatchers.IO)
+    //    val foundServers = jellyFinClient.discoverServers()
+//        .runningFold(emptyList<JellyFinServer>()) { accumulator, value -> accumulator + value }
+//        .flowOn(Dispatchers.IO)
+    val foundServers = flowOf(emptyList<JellyFinServer>()) // TODO
     val previousServers = recentServersRepo.servers
     val server = mutableStateOf("192.168.")
     val errors = mutableStateOf<Errors>(Errors.NoErrors)

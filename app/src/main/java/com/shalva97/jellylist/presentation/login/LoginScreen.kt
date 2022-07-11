@@ -21,17 +21,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.illustrations.R.drawable
 import kiwi.orbit.compose.ui.controls.*
 import kotlinx.coroutines.channels.consumeEach
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun LoginScreen(backToHome: () -> Boolean) {
 
-    val viewModel: LoginScreenViewModel = hiltViewModel()
+    val viewModel: LoginScreenViewModel = koinViewModel()
 
     LaunchedEffect(key1 = "navv") {
         viewModel.navigateToHome.consumeEach {

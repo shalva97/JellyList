@@ -17,12 +17,10 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.shalva97.jellylist.presentation.home.Home
 import com.shalva97.jellylist.presentation.login.LoginScreen
-import dagger.hilt.android.AndroidEntryPoint
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.darkColors
 import kiwi.orbit.compose.ui.foundation.lightColors
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

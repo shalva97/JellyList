@@ -55,7 +55,6 @@ android {
 
 dependencies {
     def nav_version = "2.5.0"
-    def hilt = "2.42"
     implementation implementation(project(':libraries:jellyfin',))
 
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
@@ -72,6 +71,10 @@ dependencies {
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    // Jetpack Compose
+    implementation "io.insert-koin:koin-androidx-compose:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
+
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0'
     implementation 'androidx.activity:activity-compose:1.5.0'
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
@@ -81,16 +84,8 @@ dependencies {
     androidTestImplementation "io.mockk:mockk-android:1.12.4"
     implementation("org.jellyfin.sdk:jellyfin-core:1.3.0") // TODO do not use directly
 
-    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
-    implementation "com.google.dagger:hilt-android:$hilt"
-    kapt "com.google.dagger:hilt-compiler:$hilt"
-
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'junit:junit:4.13.2'
     testImplementation 'org.robolectric:robolectric:4.8.1'
-    testImplementation group: 'com.google.dagger', name: 'hilt-android-testing', version: hilt
-    kaptTest "com.google.dagger:hilt-android-compiler:$hilt"
-    androidTestImplementation group: 'com.google.dagger', name: 'hilt-android-testing', version: hilt
-    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt"
 
 }

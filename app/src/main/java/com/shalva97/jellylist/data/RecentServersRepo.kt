@@ -6,13 +6,11 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.mapNotNull
-import javax.inject.Inject
 
 // TODO move this to recent_server module
-class RecentServersRepo @Inject constructor(
-    @ApplicationContext private val context: Context,
+class RecentServersRepo constructor(
+    private val context: Context,
 ) {
 
     val servers = context.dataStore.data.mapNotNull { it[KNOWN_SERVER] }
