@@ -19,3 +19,4 @@ include ':cli'
 
 include ':libraries:jellyfin'
 include ':libraries:recent_servers'
+include ':app-features:recent_servers'

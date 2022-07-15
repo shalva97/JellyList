@@ -1,7 +1,6 @@
 package com.shalva97.recent_servers
 
 import androidx.datastore.core.CorruptionException
-import androidx.datastore.core.DataStore
 import androidx.datastore.core.Serializer
 import com.google.protobuf.InvalidProtocolBufferException
 import java.io.InputStream
@@ -23,9 +22,3 @@ object SettingsSerializer : Serializer<Settings> {
         output: OutputStream
     ) = t.writeTo(output)
 }
-
-//val settingsDataStore: DataStore<Settings> by dataStore(
-//    fileName = "settings.pb",
-//    serializer = SettingsSerializer
-//)
-
