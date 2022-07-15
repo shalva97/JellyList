@@ -3,7 +3,7 @@ import com.google.protobuf.gradle.*
 plugins {
     id("java-library")
     id("org.jetbrains.kotlin.jvm")
-    id("com.google.protobuf") version "0.8.17"
+    id("com.google.protobuf") version "0.8.19"
 }
 
 java {
