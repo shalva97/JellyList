@@ -22,3 +22,4 @@ object SettingsSerializer : Serializer<Settings> {
         output: OutputStream
     ) = t.writeTo(output)
 }
+
