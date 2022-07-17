@@ -9,6 +9,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.shalva97.recent_servers.Settings
 import com.shalva97.recent_servers.SettingsSerializer
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -49,6 +50,11 @@ class ExampleInstrumentedTest {
 
 
         // read stuff from disk
+
+        runBlocking {
+            val data = ds.data.first().exampleCounter == 4
+            assert(data)
+        }
     }
 }
 
