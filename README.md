@@ -17,7 +17,7 @@ Java 11 installed. This is where the code is for CLI interface. Just like `app-f
 
 ### Architecture
 Architecture is similar to [Nekome](https://github.com/Chesire/Nekome). But there are some modules without Android dependency and
-a variant for CLI app.
+a variant for CLI app. [Here is few](https://github.com/Chesire/Nekome/issues/795) comments about this
 
 ### Testing
 Currently this is in progress.
