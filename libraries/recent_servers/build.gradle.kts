@@ -13,7 +13,7 @@ java {
 
 dependencies {
     implementation("androidx.datastore:datastore-core:1.0.0")
-    implementation("com.google.protobuf:protobuf-javalite:3.19.4")
+    implementation("com.google.protobuf:protobuf-javalite:3.21.2")
 }
 
 protobuf {

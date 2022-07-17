@@ -32,7 +32,7 @@ android {
 
 dependencies {
     implementation(project(":libraries:recent_servers"))
-    implementation("com.google.protobuf:protobuf-javalite:3.19.4")
+    implementation("com.google.protobuf:protobuf-javalite:3.21.2")
     implementation("androidx.datastore:datastore:1.0.0")
 
     testImplementation("junit:junit:4.13.2")
