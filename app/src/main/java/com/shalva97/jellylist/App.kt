@@ -1,8 +1,8 @@
 package com.shalva97.jellylist
 
 import android.app.Application
+import com.example.recent_servers.settingsDataStoreModule
 import com.shalva97.jellylist.data.JellyFinApiClientRepo
-import com.shalva97.jellylist.data.RecentServersRepo
 import com.shalva97.jellylist.presentation.home.HomeViewModel
 import com.shalva97.jellylist.presentation.login.LoginScreenViewModel
 import di.jellyFinModule
@@ -25,6 +25,7 @@ class App : Application() {
             androidContext(this@App)
             modules(appModule)
             modules(jellyFinModule)
+            modules(settingsDataStoreModule)
         }
     }
 }
@@ -38,7 +39,6 @@ val appModule = module {
     }
     single { get<Jellyfin>().createApi() }
     singleOf(::JellyFinApiClientRepo)
-    singleOf(::RecentServersRepo)
     single { Dispatchers.IO }
 
     viewModelOf(::LoginScreenViewModel)

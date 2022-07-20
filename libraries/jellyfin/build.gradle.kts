@@ -9,8 +9,7 @@ java {
 }
 
 dependencies {
-    implementation("org.jellyfin.sdk:jellyfin-core:1.3.0")
-
-    implementation("io.insert-koin:koin-core:${rootProject.extra["koin_version"]}")
-    testImplementation("io.insert-koin:koin-test:${rootProject.extra["koin_version"]}")
+    implementation(libs.jellyfin)
+    implementation(libs.koin.core)
+    testImplementation(libs.koin.test)
 }

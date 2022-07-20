@@ -1,14 +1,7 @@
 package com.example.recent_servers
 
-import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.core.DataStoreFactory
-import androidx.datastore.dataStore
-import androidx.datastore.dataStoreFile
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.shalva97.recent_servers.Settings
-import com.shalva97.recent_servers.SettingsSerializer
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -22,23 +15,13 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
 
-    val Context.settingsDataStore: DataStore<Settings> by dataStore(
-        fileName = "settings.pb",
-        serializer = SettingsSerializer
-    )
-
     @Test
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
 
         // write stuff to disk
-        val ds = DataStoreFactory.create(
-            serializer = SettingsSerializer,
-            produceFile = {
-                appContext.dataStoreFile("settings.pb")
-            }
-        )
+        val ds = appContext.settingsDataStore
 
         runBlocking {
             ds.updateData {

@@ -31,9 +31,13 @@ android {
 }
 
 dependencies {
+//    implementation(libs.)
     implementation(project(":libraries:recent_servers"))
     implementation("com.google.protobuf:protobuf-javalite:3.21.2")
     implementation("androidx.datastore:datastore:1.0.0")
+    implementation("io.insert-koin:koin-android:${rootProject.extra["koin_version"]}")
+//    debugImplementation ("androidx.compose.ui:ui-tooling:${rootProject.extra["koin_version"]}")
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")

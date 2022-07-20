@@ -2,10 +2,11 @@ package com.shalva97.jellylist.presentation.login
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shalva97.jellylist.data.JellyFinApiClientRepo
-import com.shalva97.jellylist.data.RecentServersRepo
+import com.shalva97.recent_servers.Settings
 import data.JellyFinRepo
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.channels.Channel
@@ -16,14 +17,16 @@ import models.JellyFinServer
 class LoginScreenViewModel constructor(
     private val jellyFinClient: JellyFinRepo,
     private val jellyFinApiClient: JellyFinApiClientRepo,
-    private val recentServersRepo: RecentServersRepo,
+    private val recentServersRepo: DataStore<Settings>,
 ) : ViewModel() {
 
     //    val foundServers = jellyFinClient.discoverServers()
 //        .runningFold(emptyList<JellyFinServer>()) { accumulator, value -> accumulator + value }
 //        .flowOn(Dispatchers.IO)
     val foundServers = flowOf(emptyList<JellyFinServer>()) // TODO
-    val previousServers = recentServersRepo.servers
+
+    //    val previousServers = recentServersRepo.servers
+//    val previousServers = recentServersRepo.servers
     val server = mutableStateOf("192.168.")
     val errors = mutableStateOf<Errors>(Errors.NoErrors)
     val showAuthFields = mutableStateOf(false)
@@ -62,7 +65,7 @@ class LoginScreenViewModel constructor(
         val recommendedServer = jellyFinClient.findRecommendedServer(jellyFinServer)
         jellyFinApiClient.baseUrl = recommendedServer.address
         showAuthFields.value = true
-        recentServersRepo.saveServer(recommendedServer.address)
+//        recentServersRepo.saveServer(recommendedServer.address)
     }
 
     fun onRecentServerClicked(url: String) {

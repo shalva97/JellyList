@@ -23,3 +23,4 @@ object SettingsSerializer : Serializer<Settings> {
     ) = t.writeTo(output)
 }
 
+const val SETTINGS_FILE_NAME = "settings.pb"

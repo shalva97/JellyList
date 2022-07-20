@@ -12,9 +12,9 @@ java {
 }
 
 dependencies {
-    implementation("androidx.datastore:datastore-core:1.0.0")
-    implementation("com.google.protobuf:protobuf-javalite:3.21.2")
-    implementation("io.insert-koin:koin-core:${rootProject.extra["koin_version"]}")
+    implementation(libs.androidx.datastore.core)
+    implementation(libs.protobuf)
+    implementation(libs.koin.core)
 }
 
 protobuf {
