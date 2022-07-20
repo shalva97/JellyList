@@ -33,7 +33,7 @@ dependencyResolutionManagement {
             library("accompanist", "com.google.accompanist:accompanist-systemuicontroller:0.24.8-beta")
             library("mockk", "io.mockk:mockk:1.12.4")
             library("mockk.android", "io.mockk:mockk-android:1.12.4")
-            library("jellyfin", "org.jellyfin.sdk:jellyfin-core:1.3.0")
+            library("jellyfin", "org.jellyfin.sdk:jellyfin-core:1.3.1")
             library("junit", "junit:junit:4.13.2")
             library("robolectric", "org.robolectric:robolectric:4.8.1")
             library("picocli", "info.picocli:picocli:4.6.3")
