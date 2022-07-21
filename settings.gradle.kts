@@ -13,6 +13,11 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         create("libs") {
+            version("minSdk", "26")
+            version("targetSdk", "32")
+            version("versionCode", "1")
+            version("versionName", "1.0")
+
             library("kiwi.icons", "kiwi.orbit.compose:icons:0.16.0")
             library("kiwi.ui", "kiwi.orbit.compose:ui:0.16.0")
             library("kiwi.illustrations", "kiwi.orbit.compose:illustrations:0.16.0")
@@ -25,6 +30,7 @@ dependencyResolutionManagement {
             library("androidx.compose.activity", "androidx.activity:activity-compose:1.5.0")
             library("androidx.datastore.preferences", "androidx.datastore:datastore-preferences:1.0.0")
             library("androidx.datastore.core", "androidx.datastore:datastore-core:1.0.0")
+            library("androidx.datastore", "androidx.datastore:datastore:1.0.0")
             library("koin.compose", "io.insert-koin:koin-androidx-compose:3.2.0")
             library("koin.android", "io.insert-koin:koin-android:3.2.0")
             library("koin.core", "io.insert-koin:koin-core:3.2.0")

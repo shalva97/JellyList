@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = libs.versions.targetSdk.get().toInt()
 
     defaultConfig {
-        minSdk = 26
-        targetSdk = 32
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -31,15 +31,12 @@ android {
 }
 
 dependencies {
-//    implementation(libs.)
     implementation(project(":libraries:recent_servers"))
-    implementation("com.google.protobuf:protobuf-javalite:3.21.2")
-    implementation("androidx.datastore:datastore:1.0.0")
-    implementation("io.insert-koin:koin-android:${rootProject.extra["koin_version"]}")
-//    debugImplementation ("androidx.compose.ui:ui-tooling:${rootProject.extra["koin_version"]}")
+    implementation(libs.protobuf)
+    implementation(libs.androidx.datastore)
+    implementation(libs.koin.android)
+    implementation(libs.androidx.compose.ui)
 
-
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.junit)
 }
