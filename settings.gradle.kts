@@ -38,7 +38,7 @@ dependencyResolutionManagement {
             library("robolectric", "org.robolectric:robolectric:4.8.1")
             library("picocli", "info.picocli:picocli:4.6.3")
             library("picocli.codegen", "info.picocli:picocli-codegen:4.6.3")
-            library("protobuf", "com.google.protobuf:protobuf-javalite:3.21.2")
+            library("protobuf", "com.google.protobuf:protobuf-javalite:3.21.3")
         }
     }
 }
