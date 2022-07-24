@@ -41,3 +41,9 @@ fun Home(navigateToLogin: () -> Unit = { }) {
         }
     }
 }
+
+@Preview
+@Composable
+fun Blah() {
+    Text(text = "asdf")
+}

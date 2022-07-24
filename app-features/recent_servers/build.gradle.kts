@@ -28,6 +28,12 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.2.0"
+    }
 }
 
 dependencies {
@@ -36,7 +42,11 @@ dependencies {
     implementation(libs.androidx.datastore)
     implementation(libs.koin.android)
     implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.tooling)
+    implementation(libs.androidx.compose.material)
 
+    androidTestImplementation("androidx.test.ext:junit-ktx:1.1.3")
     testImplementation(libs.junit)
     androidTestImplementation(libs.junit)
 }
