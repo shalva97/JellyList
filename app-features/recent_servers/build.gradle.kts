@@ -46,7 +46,6 @@ dependencies {
     implementation(libs.androidx.compose.tooling)
     implementation(libs.androidx.compose.material)
 
-    androidTestImplementation("androidx.test.ext:junit-ktx:1.1.3")
+    androidTestImplementation(libs.bundles.androidx.androidTests)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.junit)
 }

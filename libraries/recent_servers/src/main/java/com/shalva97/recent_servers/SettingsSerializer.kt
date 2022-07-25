@@ -3,15 +3,19 @@ package com.shalva97.recent_servers
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
 import com.google.protobuf.InvalidProtocolBufferException
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromByteArray
+import kotlinx.serialization.encodeToByteArray
+import kotlinx.serialization.protobuf.ProtoBuf
 import java.io.InputStream
 import java.io.OutputStream
 
 object SettingsSerializer : Serializer<Settings> {
-    override val defaultValue: Settings = Settings.getDefaultInstance()
+    override val defaultValue: Settings = Settings()
 
     override suspend fun readFrom(input: InputStream): Settings {
         try {
-            return Settings.parseFrom(input)
+            return ProtoBuf.decodeFromByteArray(input.readBytes())
         } catch (exception: InvalidProtocolBufferException) {
             throw CorruptionException("Cannot read proto.", exception)
         }
@@ -19,8 +23,16 @@ object SettingsSerializer : Serializer<Settings> {
 
     override suspend fun writeTo(
         t: Settings,
-        output: OutputStream
-    ) = t.writeTo(output)
+        output: OutputStream,
+    ) {
+        val encodeToByteArray = ProtoBuf.encodeToByteArray(t)
+        output.write(encodeToByteArray)
+    }
 }
 
 const val SETTINGS_FILE_NAME = "settings.pb"
+
+@Serializable
+data class Settings(
+    val name: String = "",
+)
