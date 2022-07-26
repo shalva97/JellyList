@@ -28,24 +28,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0"
-    }
 }
 
 dependencies {
-    implementation(project(":libraries:recent_servers"))
     implementation(project(":libraries:jellyfin"))
-    implementation(project(":app-features:core"))
-    implementation(libs.protobuf)
-    implementation(libs.androidx.datastore)
     implementation(libs.bundles.androidx.compose)
-    implementation(libs.bundles.kiwi)
+    implementation(libs.jellyfin)
     implementation(libs.koin.android)
-    implementation(libs.koin.compose)
     debugImplementation(libs.bundles.androidx.compose.tooling)
     androidTestImplementation(libs.bundles.androidx.androidTests)
     testImplementation(libs.junit)

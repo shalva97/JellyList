@@ -1,7 +1,7 @@
 package com.shalva97.jellylist
 
 import android.app.Application
-import com.example.recent_servers.settingsDataStoreModule
+import com.example.recent_servers.data.settingsDataStoreModule
 import com.shalva97.jellylist.data.JellyFinApiClientRepo
 import com.shalva97.jellylist.presentation.home.HomeViewModel
 import com.shalva97.jellylist.presentation.login.LoginScreenViewModel

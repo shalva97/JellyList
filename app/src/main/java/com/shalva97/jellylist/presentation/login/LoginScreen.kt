@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.example.recent_servers.presentation.RecentServers
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.illustrations.R.drawable
 import kiwi.orbit.compose.ui.controls.*
@@ -59,32 +60,7 @@ fun LoginScreen(backToHome: () -> Boolean) {
         .padding(10.dp),
         verticalArrangement = Arrangement.Bottom) {
 
-//        if (discoveredServer.value.isNotEmpty() && previousServers.value.isNotEmpty()) {
-//            Text(text = "Servers", fontWeight = FontWeight.SemiBold)
-//
-//            LazyColumn {
-//                items(discoveredServer.value.size) { index ->
-//                    ListChoice(onClick = {
-//                        viewModel.onDiscoveredServerClicked(discoveredServer.value[index])
-//                    }, description = {
-//                        Text(text = "Discovered")
-//                    }) {
-//                        Text(text = discoveredServer.value[index].address)
-//                    }
-//                }
-//
-//                items(previousServers.value.size) { index ->
-//                    ListChoice(onClick = {
-//                        viewModel.onRecentServerClicked(previousServers.value.elementAt(index))
-//                    }, description = {
-//                        Text(text = "Recent")
-//                    }) {
-//                        Text(text = previousServers.value.elementAt(index))
-//                    }
-//                }
-//
-//            }
-//        }
+        RecentServers()
 
         TextField(value = viewModel.server.value,
             modifier = Modifier

@@ -12,7 +12,9 @@ androidx-compose-navigation = "androidx.navigation:navigation-compose:2.5.0"
 androidx-compose-foundation = "androidx.compose.foundation:foundation:1.3.0-alpha01"
 androidx-compose-ui = "androidx.compose.ui:ui:1.3.0-alpha01"
 androidx-compose-material = "androidx.compose.material:material:1.3.0-alpha01"
-androidx-compose-tooling = "androidx.compose.ui:ui-tooling-preview:1.3.0-alpha01"
+androidx-compose-tooling-preview = "androidx.compose.ui:ui-tooling-preview:1.3.0-alpha01"
+androidx-compose-tooling-poolingcontainer = "androidx.customview:customview-poolingcontainer:1.0.0-rc01"
+androidx-compose-tooling = "androidx.compose.ui:ui-tooling:1.1.1"
 androidx-lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0"
 androidx-compose-activity = "androidx.activity:activity-compose:1.5.0"
 androidx-datastore-preferences = "androidx.datastore:datastore-preferences:1.0.0"
@@ -36,8 +38,10 @@ junit = "junit:junit:4.13.2"
 robolectric = "org.robolectric:robolectric:4.8.1"
 picocli = "info.picocli:picocli:4.6.3"
 picocli-codegen = "info.picocli:picocli-codegen:4.6.3"
-protobuf = "com.google.protobuf:protobuf-javalite:3.21.2"
+protobuf = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf:1.4.0-RC"
 
 [bundles]
 kiwi = ["kiwi-icons", "kiwi-ui", "kiwi-illustrations"]
-androidx-androidTests = ["androidx-test-coreKtx", "androidx-test-runner", "androidx-test-rules", "androidx-test-core-junitKtx"]
+androidx-androidTests = ["androidx-test-coreKtx", "koin-test", "androidx-test-runner", "androidx-test-rules", "androidx-test-core-junitKtx"]
+androidx-compose = ["androidx-compose-foundation", "koin-compose", "androidx-compose-tooling-preview", "androidx-compose-ui", "androidx-compose-material", "androidx-compose-activity", ]
+androidx-compose-tooling = ["androidx-compose-tooling-poolingcontainer", "androidx-compose-tooling"]

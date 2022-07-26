@@ -1,4 +1,4 @@
-package com.example.recent_servers
+package com.example.recent_servers.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore

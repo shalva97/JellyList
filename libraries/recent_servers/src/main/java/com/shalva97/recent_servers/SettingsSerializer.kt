@@ -2,8 +2,8 @@ package com.shalva97.recent_servers
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
-import com.google.protobuf.InvalidProtocolBufferException
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.encodeToByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
@@ -16,7 +16,7 @@ object SettingsSerializer : Serializer<Settings> {
     override suspend fun readFrom(input: InputStream): Settings {
         try {
             return ProtoBuf.decodeFromByteArray(input.readBytes())
-        } catch (exception: InvalidProtocolBufferException) {
+        } catch (exception: SerializationException) {
             throw CorruptionException("Cannot read proto.", exception)
         }
     }
