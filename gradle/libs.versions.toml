@@ -36,7 +36,7 @@ junit = "junit:junit:4.13.2"
 robolectric = "org.robolectric:robolectric:4.8.1"
 picocli = "info.picocli:picocli:4.6.3"
 picocli-codegen = "info.picocli:picocli-codegen:4.6.3"
-protobuf = "com.google.protobuf:protobuf-javalite:3.21.2"
+protobuf = "com.google.protobuf:protobuf-javalite:3.21.4"
 
 [bundles]
 kiwi = ["kiwi-icons", "kiwi-ui", "kiwi-illustrations"]
