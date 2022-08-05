@@ -23,8 +23,11 @@ a variant for CLI app. [Here is few](https://github.com/Chesire/Nekome/issues/79
 Currently this is in progress.
 
 
-naming [convention](https://osherove.com/blog/2005/4/3/naming-standards-for-unit-tests.html) for tests 
+naming [convention](https://osherove.com/blog/2005/4/3/naming-standards-for-unit-tests.html) for tests
 
+### Compose
+Composables should not depens on viewModel, it should be possible to preview them without
+https://stackoverflow.com/questions/64841794/viewmodels-creation-is-not-supported-in-preview#comment114645402_64841794
 ### Coroutines
 https://developer.android.com/kotlin/coroutines/coroutines-best-practices
 https://medium.com/androiddevelopers/coroutines-patterns-for-work-that-shouldnt-be-cancelled-e26c40f142ad

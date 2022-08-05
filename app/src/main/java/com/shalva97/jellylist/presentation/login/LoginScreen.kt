@@ -60,7 +60,9 @@ fun LoginScreen(backToHome: () -> Boolean) {
         .padding(10.dp),
         verticalArrangement = Arrangement.Bottom) {
 
-        RecentServers()
+        RecentServers {
+            viewModel.onRecentServerClicked(it.address)
+        }
 
         TextField(value = viewModel.server.value,
             modifier = Modifier

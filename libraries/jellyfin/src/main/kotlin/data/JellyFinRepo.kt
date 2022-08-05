@@ -1,5 +1,6 @@
 package data
 
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import models.JellyFinServer
@@ -12,9 +13,15 @@ class JellyFinRepo constructor(
     private val jellyFin: Jellyfin,
 ) {
 
+    val discoveredServers = MutableStateFlow<List<JellyFinServer>>(emptyList())
+
     suspend fun discoverServers(): List<JellyFinServer> {
         return jellyFin.discovery.discoverLocalServers().map { it.toDomainModel() }
             .toList(mutableListOf())
+    }
+
+    suspend fun discover() {
+        discoveredServers.tryEmit(discoverServers())
     }
 
     suspend fun findRecommendedServer(url: String): JellyFinServer {

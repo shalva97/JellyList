@@ -4,24 +4,30 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.shalva97.core.jellyfinClient
-import di.jellyFinModule
+import com.example.recent_servers.di.recentServersModule
 import kiwi.orbit.compose.ui.controls.ListChoice
+import kiwi.orbit.compose.ui.controls.Scaffold
+import models.JellyFinServer
+import models.JellyFinServerType
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.compose.koinViewModel
-import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.context.startKoin
-import org.koin.dsl.module
+import org.koin.mp.KoinPlatformTools
 
 @Composable
-fun RecentServers() {
+fun RecentServers(
+    state: State<List<JellyFinServer>>? = null,
+    onServerClick: ((JellyFinServer) -> Unit)? = null
+) {
 
-    val viewModel = koinViewModel<RecentServersViewModel>()
-    val discoveredServer = viewModel.discoveredServers.collectAsState()
+    val discoveredServer =
+        state ?: koinViewModel<RecentServersViewModel>().discoveredServers.collectAsState()
 
     Column {
         Text(text = "Servers", fontWeight = FontWeight.SemiBold)
@@ -29,6 +35,7 @@ fun RecentServers() {
         LazyColumn {
             items(discoveredServer.value.size) { index ->
                 ListChoice(onClick = {
+                    onServerClick?.invoke(discoveredServer.value[index])
 //                viewModel.onDiscoveredServerClicked(discoveredServer.value[index])
                 }, description = {
                     Text(text = "Discovered")
@@ -49,21 +56,29 @@ fun RecentServers() {
 //        }
         }
     }
+}
 
-
+@Preview
+@Composable
+fun blah() {
+    Scaffold {
+        RecentServers(produceState(initialValue = listOf(
+            JellyFinServer("blah.com", JellyFinServerType.RECENT),
+            JellyFinServer("somewebsite.com", JellyFinServerType.RECENT_AND_DISCOVERED),
+            JellyFinServer("blah.com"),
+            JellyFinServer("blah.com"),
+        ), producer = {}))
+    }
 }
 
 @Preview
 @Composable
 fun RecentServerItem() {
     val androidContext = LocalContext.current
-    startKoin {
-        androidContext(androidContext)
-        modules(jellyFinModule, jellyfinClient)
 
-        modules(module {
-            viewModelOf(::RecentServersViewModel)
-        })
+    KoinPlatformTools.defaultContext().getOrNull() ?: startKoin {
+        androidContext(androidContext)
+        modules(recentServersModule)
     }
     RecentServers()
 }

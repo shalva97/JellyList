@@ -9,15 +9,14 @@ import kotlinx.coroutines.launch
 import models.JellyFinServer
 
 class RecentServersViewModel(
-    private val recentServersRepo: JellyFinRepo,
+    private val jellyFinRepo: JellyFinRepo,
 ) : ViewModel() {
 
-    val discoveredServers = MutableStateFlow<List<JellyFinServer>>(emptyList())
+    val discoveredServers = jellyFinRepo.discoveredServers
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val servers = recentServersRepo.discoverServers()
-            discoveredServers.emit(servers)
+            jellyFinRepo.discover()
         }
     }
 }

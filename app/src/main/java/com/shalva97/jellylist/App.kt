@@ -2,6 +2,7 @@ package com.shalva97.jellylist
 
 import android.app.Application
 import com.example.recent_servers.data.settingsDataStoreModule
+import com.example.recent_servers.di.recentServersModule
 import com.shalva97.jellylist.data.JellyFinApiClientRepo
 import com.shalva97.jellylist.presentation.home.HomeViewModel
 import com.shalva97.jellylist.presentation.login.LoginScreenViewModel
@@ -26,6 +27,7 @@ class App : Application() {
             modules(appModule)
             modules(jellyFinModule)
             modules(settingsDataStoreModule)
+            modules(recentServersModule)
         }
     }
 }
