@@ -14,6 +14,6 @@ data class JellyFinServer(
     constructor(serverDiscoveryInfo: ServerDiscoveryInfo) : this(serverDiscoveryInfo.address)
 }
 
-enum class JellyFinServerType {
-    DISCOVERED, RECENT, RECENT_AND_DISCOVERED
+enum class JellyFinServerType(val description: String) {
+    DISCOVERED("Discovered"), RECENT("Recent"), RECENT_AND_DISCOVERED("Recent and discovered")
 }

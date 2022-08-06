@@ -13,7 +13,7 @@ class JellyFinRepo constructor(
     private val jellyFin: Jellyfin,
 ) {
 
-    val discoveredServers = MutableStateFlow<List<JellyFinServer>>(emptyList())
+    val servers = MutableStateFlow<List<JellyFinServer>>(emptyList())
 
     suspend fun discoverServers(): List<JellyFinServer> {
         return jellyFin.discovery.discoverLocalServers().map { it.toDomainModel() }
@@ -21,7 +21,7 @@ class JellyFinRepo constructor(
     }
 
     suspend fun discover() {
-        discoveredServers.tryEmit(discoverServers())
+        servers.tryEmit(discoverServers())
     }
 
     suspend fun findRecommendedServer(url: String): JellyFinServer {

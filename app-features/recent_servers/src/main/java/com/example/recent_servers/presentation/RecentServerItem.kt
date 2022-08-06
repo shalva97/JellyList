@@ -23,26 +23,27 @@ import org.koin.mp.KoinPlatformTools
 @Composable
 fun RecentServers(
     state: State<List<JellyFinServer>>? = null,
-    onServerClick: ((JellyFinServer) -> Unit)? = null
+    onServerClick: ((JellyFinServer) -> Unit)? = null,
 ) {
 
     val discoveredServer =
-        state ?: koinViewModel<RecentServersViewModel>().discoveredServers.collectAsState()
+        state ?: koinViewModel<RecentServersViewModel>().servers.collectAsState()
 
-    Column {
-        Text(text = "Servers", fontWeight = FontWeight.SemiBold)
+    if (discoveredServer.value.isNotEmpty())
+        Column {
+            Text(text = "Servers", fontWeight = FontWeight.SemiBold)
 
-        LazyColumn {
-            items(discoveredServer.value.size) { index ->
-                ListChoice(onClick = {
-                    onServerClick?.invoke(discoveredServer.value[index])
+            LazyColumn {
+                items(discoveredServer.value.size) { index ->
+                    ListChoice(onClick = {
+                        onServerClick?.invoke(discoveredServer.value[index])
 //                viewModel.onDiscoveredServerClicked(discoveredServer.value[index])
-                }, description = {
-                    Text(text = "Discovered")
-                }) {
-                    Text(text = discoveredServer.value[index].address)
+                    }, description = {
+                        Text(text = discoveredServer.value[index].discoveryType.description)
+                    }) {
+                        Text(text = discoveredServer.value[index].address)
+                    }
                 }
-            }
 
 //        items(previousServers.value.size) { index ->
 //            ListChoice(onClick = {
@@ -54,8 +55,8 @@ fun RecentServers(
 //            }
 //
 //        }
+            }
         }
-    }
 }
 
 @Preview
