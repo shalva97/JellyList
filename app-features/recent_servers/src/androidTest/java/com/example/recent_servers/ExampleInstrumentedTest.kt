@@ -3,8 +3,8 @@ package com.example.recent_servers
 import androidx.datastore.core.DataStore
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.recent_servers.data.settingsDataStoreModule
-import com.shalva97.recent_servers.Settings
+import com.example.recent_servers.data.recentServerDataStoreModule
+import com.shalva97.recent_servers.RecentServer
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -22,22 +22,28 @@ class ExampleInstrumentedTest : KoinTest {
     fun setUp() {
         startKoin {
             androidContext(InstrumentationRegistry.getInstrumentation().targetContext)
-            modules(settingsDataStoreModule)
+            modules(recentServerDataStoreModule)
         }
     }
 
     @Test
     fun useAppContext() {
-        val ds: DataStore<Settings> by inject()
+        val ds: DataStore<Set<RecentServer>> by inject()
 
         runBlocking {
+            ds.updateData { emptySet() }
+
             ds.updateData {
-                it.copy("123")
+                it + listOf(RecentServer(
+                    name = "Arch Linux",
+                    address = "123.123.123.123"
+                ))
             }
         }
 
         runBlocking {
-            val data = ds.data.first().name == "123"
+            val first = ds.data.first()
+            val data = first.first().name == "Arch Linux"
             assert(data)
         }
     }

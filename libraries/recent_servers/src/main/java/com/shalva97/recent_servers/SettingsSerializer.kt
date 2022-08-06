@@ -1,19 +1,18 @@
+@file:OptIn(ExperimentalSerializationApi::class)
+
 package com.shalva97.recent_servers
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
-import kotlinx.serialization.decodeFromByteArray
-import kotlinx.serialization.encodeToByteArray
+import kotlinx.serialization.*
 import kotlinx.serialization.protobuf.ProtoBuf
 import java.io.InputStream
 import java.io.OutputStream
 
-object SettingsSerializer : Serializer<Settings> {
-    override val defaultValue: Settings = Settings()
+object SettingsSerializer : Serializer<Set<RecentServer>> {
+    override val defaultValue: Set<RecentServer> = emptySet()
 
-    override suspend fun readFrom(input: InputStream): Settings {
+    override suspend fun readFrom(input: InputStream): Set<RecentServer> {
         try {
             return ProtoBuf.decodeFromByteArray(input.readBytes())
         } catch (exception: SerializationException) {
@@ -22,7 +21,7 @@ object SettingsSerializer : Serializer<Settings> {
     }
 
     override suspend fun writeTo(
-        t: Settings,
+        t: Set<RecentServer>,
         output: OutputStream,
     ) {
         val encodeToByteArray = ProtoBuf.encodeToByteArray(t)
@@ -30,9 +29,10 @@ object SettingsSerializer : Serializer<Settings> {
     }
 }
 
-const val SETTINGS_FILE_NAME = "settings.pb"
+const val RECENT_SERVERS_FILE_NAME = "settings.pb"
 
 @Serializable
-data class Settings(
-    val name: String = "",
+data class RecentServer(
+    val name: String = "2",
+    val address: String = "2",
 )

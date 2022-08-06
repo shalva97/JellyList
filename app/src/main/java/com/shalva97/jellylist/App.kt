@@ -1,7 +1,7 @@
 package com.shalva97.jellylist
 
 import android.app.Application
-import com.example.recent_servers.data.settingsDataStoreModule
+import com.example.recent_servers.data.recentServerDataStoreModule
 import com.example.recent_servers.di.recentServersModule
 import com.shalva97.jellylist.data.JellyFinApiClientRepo
 import com.shalva97.jellylist.presentation.home.HomeViewModel
@@ -26,7 +26,7 @@ class App : Application() {
             androidContext(this@App)
             modules(appModule)
             modules(jellyFinModule)
-            modules(settingsDataStoreModule)
+            modules(recentServerDataStoreModule)
             modules(recentServersModule)
         }
     }

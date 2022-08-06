@@ -6,7 +6,7 @@ import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shalva97.jellylist.data.JellyFinApiClientRepo
-import com.shalva97.recent_servers.Settings
+import com.shalva97.recent_servers.RecentServer
 import data.JellyFinRepo
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.channels.Channel
@@ -17,7 +17,7 @@ import models.JellyFinServer
 class LoginScreenViewModel constructor(
     private val jellyFinClient: JellyFinRepo,
     private val jellyFinApiClient: JellyFinApiClientRepo,
-    private val recentServersRepo: DataStore<Settings>,
+    private val recentServersRepo: DataStore<RecentServer>,
 ) : ViewModel() {
 
     //    val foundServers = jellyFinClient.discoverServers()
