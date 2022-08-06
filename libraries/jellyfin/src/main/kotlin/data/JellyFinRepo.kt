@@ -1,9 +1,8 @@
 package data
 
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toList
-import models.JellyFinServer
+import androidx.datastore.core.DataStore
+import com.shalva97.core.JellyFinServer
+import kotlinx.coroutines.flow.*
 import org.jellyfin.sdk.Jellyfin
 import org.jellyfin.sdk.discovery.RecommendedServerInfo
 import org.jellyfin.sdk.discovery.RecommendedServerInfoScore
@@ -11,17 +10,20 @@ import org.jellyfin.sdk.model.api.ServerDiscoveryInfo
 
 class JellyFinRepo constructor(
     private val jellyFin: Jellyfin,
+    private val recentServersStore: DataStore<Set<JellyFinServer>>,
 ) {
 
-    val servers = MutableStateFlow<List<JellyFinServer>>(emptyList())
+    val servers = MutableStateFlow<Set<JellyFinServer>>(emptySet())
 
-    suspend fun discoverServers(): List<JellyFinServer> {
-        return jellyFin.discovery.discoverLocalServers().map { it.toDomainModel() }
-            .toList(mutableListOf())
+    suspend fun discoverServers(): Set<JellyFinServer> {
+        return jellyFin.discovery.discoverLocalServers()
+            .map { it.toDomainModel() }
+            .toSet(mutableSetOf())
     }
 
     suspend fun discover() {
-        servers.tryEmit(discoverServers())
+        val value = discoverServers() + recentServersStore.data.first()
+        servers.tryEmit(value)
     }
 
     suspend fun findRecommendedServer(url: String): JellyFinServer {

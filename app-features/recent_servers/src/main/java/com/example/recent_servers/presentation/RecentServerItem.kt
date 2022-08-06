@@ -11,10 +11,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.recent_servers.di.recentServersModule
+import com.shalva97.core.JellyFinServer
+import com.shalva97.core.JellyFinServerType
 import kiwi.orbit.compose.ui.controls.ListChoice
 import kiwi.orbit.compose.ui.controls.Scaffold
-import models.JellyFinServer
-import models.JellyFinServerType
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.context.startKoin
@@ -27,7 +27,7 @@ fun RecentServers(
 ) {
 
     val discoveredServer =
-        state ?: koinViewModel<RecentServersViewModel>().servers.collectAsState()
+        state ?: koinViewModel<RecentServersViewModel>().servers.collectAsState(emptyList())
 
     if (discoveredServer.value.isNotEmpty())
         Column {

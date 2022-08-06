@@ -47,5 +47,16 @@ class ExampleInstrumentedTest : KoinTest {
             assert(data)
         }
     }
+
+    @Test
+    fun dataStoreIsEmpty() {
+        val ds: DataStore<Set<RecentServer>> by inject()
+
+        runBlocking {
+            val first = ds.data.first()
+            val data = first.isEmpty()
+            assert(data)
+        }
+    }
 }
 

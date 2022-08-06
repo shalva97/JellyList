@@ -11,7 +11,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.onKeyEvent
@@ -38,9 +37,7 @@ fun LoginScreen(backToHome: () -> Boolean) {
         }
     }
 
-    val discoveredServer = viewModel.foundServers.collectAsState(initial = emptyList())
     val errors = viewModel.errors
-//    val previousServers = viewModel.previousServers.collectAsState(initial = emptyList())
 
     if (viewModel.loading.value) {
         LinearProgressIndicator(modifier = Modifier.fillMaxWidth())

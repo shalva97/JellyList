@@ -4,15 +4,19 @@ package com.shalva97.recent_servers
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
-import kotlinx.serialization.*
+import com.shalva97.core.JellyFinServer
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.decodeFromByteArray
+import kotlinx.serialization.encodeToByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
 import java.io.InputStream
 import java.io.OutputStream
 
-object SettingsSerializer : Serializer<Set<RecentServer>> {
-    override val defaultValue: Set<RecentServer> = emptySet()
+object SettingsSerializer : Serializer<Set<JellyFinServer>> {
+    override val defaultValue: Set<JellyFinServer> = emptySet()
 
-    override suspend fun readFrom(input: InputStream): Set<RecentServer> {
+    override suspend fun readFrom(input: InputStream): Set<JellyFinServer> {
         try {
             return ProtoBuf.decodeFromByteArray(input.readBytes())
         } catch (exception: SerializationException) {
@@ -21,7 +25,7 @@ object SettingsSerializer : Serializer<Set<RecentServer>> {
     }
 
     override suspend fun writeTo(
-        t: Set<RecentServer>,
+        t: Set<JellyFinServer>,
         output: OutputStream,
     ) {
         val encodeToByteArray = ProtoBuf.encodeToByteArray(t)
@@ -30,9 +34,3 @@ object SettingsSerializer : Serializer<Set<RecentServer>> {
 }
 
 const val RECENT_SERVERS_FILE_NAME = "settings.pb"
-
-@Serializable
-data class RecentServer(
-    val name: String = "2",
-    val address: String = "2",
-)

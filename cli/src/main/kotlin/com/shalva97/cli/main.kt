@@ -1,9 +1,9 @@
 package com.shalva97.cli
 
+import com.shalva97.core.JellyFinServer
 import data.JellyFinRepo
 import di.jellyFinModule
 import kotlinx.coroutines.runBlocking
-import models.JellyFinServer
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
@@ -27,7 +27,7 @@ class CLI : Callable<Int>, KoinComponent {
     override fun call(): Int {
 
         if (discover) {
-            val servers: List<JellyFinServer>
+            val servers: Set<JellyFinServer>
 
             runBlocking {
                 servers = jellyFinRepo.discoverServers()

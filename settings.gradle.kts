@@ -20,3 +20,4 @@ include(":app",
     ":libraries:recent_servers",
     ":app-features:recent_servers")
 include(":app-features:core")
+include(":libraries:core")

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.shalva97.jellylist"
@@ -33,8 +33,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     buildFeatures {
@@ -51,9 +51,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":libraries:jellyfin"))
     implementation(project(":app-features:recent_servers"))
-    implementation(project(":libraries:recent_servers"))
+
     implementation(libs.bundles.kiwi)
     implementation(libs.androidx.compose.navigation)
     implementation(libs.androidx.compose.foundation)

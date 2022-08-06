@@ -37,9 +37,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":libraries:recent_servers"))
-    implementation(project(":libraries:jellyfin"))
-    implementation(project(":app-features:core"))
+    api(project(":libraries:recent_servers"))
+    api(project(":libraries:jellyfin"))
+    api(project(":app-features:core"))
     implementation(libs.protobuf)
     implementation(libs.androidx.datastore)
     implementation(libs.bundles.androidx.compose)

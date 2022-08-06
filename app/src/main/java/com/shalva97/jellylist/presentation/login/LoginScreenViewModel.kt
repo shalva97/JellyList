@@ -2,31 +2,20 @@ package com.shalva97.jellylist.presentation.login
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shalva97.core.JellyFinServer
 import com.shalva97.jellylist.data.JellyFinApiClientRepo
-import com.shalva97.recent_servers.RecentServer
 import data.JellyFinRepo
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
-import models.JellyFinServer
 
 class LoginScreenViewModel constructor(
     private val jellyFinClient: JellyFinRepo,
     private val jellyFinApiClient: JellyFinApiClientRepo,
-    private val recentServersRepo: DataStore<RecentServer>,
 ) : ViewModel() {
 
-    //    val foundServers = jellyFinClient.discoverServers()
-//        .runningFold(emptyList<JellyFinServer>()) { accumulator, value -> accumulator + value }
-//        .flowOn(Dispatchers.IO)
-    val foundServers = flowOf(emptyList<JellyFinServer>()) // TODO
-
-    //    val previousServers = recentServersRepo.servers
-//    val previousServers = recentServersRepo.servers
     val server = mutableStateOf("192.168.")
     val errors = mutableStateOf<Errors>(Errors.NoErrors)
     val showAuthFields = mutableStateOf(false)

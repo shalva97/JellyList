@@ -1,7 +1,6 @@
 plugins {
     id("java-library")
     id("org.jetbrains.kotlin.jvm")
-    kotlin("plugin.serialization") version "1.7.0"
 }
 
 java {
@@ -10,8 +9,6 @@ java {
 }
 
 dependencies {
-    implementation(libs.androidx.datastore.core)
-    api(project(":libraries:core"))
     implementation(libs.protobuf)
-    implementation(libs.koin.core)
+    implementation(libs.jellyfin)
 }
