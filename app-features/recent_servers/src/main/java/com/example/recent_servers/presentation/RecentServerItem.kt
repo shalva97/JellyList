@@ -6,7 +6,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.produceState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -63,12 +63,12 @@ fun RecentServers(
 @Composable
 fun blah() {
     Scaffold {
-        RecentServers(produceState(initialValue = listOf(
+        RecentServers(mutableStateOf(listOf(
             JellyFinServer("blah.com", JellyFinServerType.RECENT),
             JellyFinServer("somewebsite.com", JellyFinServerType.RECENT_AND_DISCOVERED),
             JellyFinServer("blah.com"),
             JellyFinServer("blah.com"),
-        ), producer = {}))
+        )))
     }
 }
 
