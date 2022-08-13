@@ -37,24 +37,12 @@ fun RecentServers(
                 items(discoveredServer.value.size) { index ->
                     ListChoice(onClick = {
                         onServerClick?.invoke(discoveredServer.value[index])
-//                viewModel.onDiscoveredServerClicked(discoveredServer.value[index])
                     }, description = {
                         Text(text = discoveredServer.value[index].discoveryType.description)
                     }) {
                         Text(text = discoveredServer.value[index].address)
                     }
                 }
-
-//        items(previousServers.value.size) { index ->
-//            ListChoice(onClick = {
-//                viewModel.onRecentServerClicked(previousServers.value.elementAt(index))
-//            }, description = {
-//                Text(text = "Recent")
-//            }) {
-//                Text(text = previousServers.value.elementAt(index))
-//            }
-//
-//        }
             }
         }
 }
