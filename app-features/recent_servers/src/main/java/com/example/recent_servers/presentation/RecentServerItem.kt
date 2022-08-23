@@ -1,5 +1,6 @@
 package com.example.recent_servers.presentation
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
@@ -47,6 +48,7 @@ fun RecentServers(
 @Preview
 @Composable
 fun blah() {
+    @SuppressLint("UnrememberedMutableState")
     val state = mutableStateOf(listOf(
         JellyFinServer("blah.com", JellyFinServerType.RECENT),
         JellyFinServer("somewebsite.com", JellyFinServerType.RECENT_AND_DISCOVERED),
