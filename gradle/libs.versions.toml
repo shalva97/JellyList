@@ -1,7 +1,7 @@
 [versions]
 minSdk = "23"
-targetSdk = "32"
-compileSdk = "32"
+targetSdk = "33"
+compileSdk = "33"
 versionCode = "1"
 versionName = "1.0"
 
