@@ -3,10 +3,7 @@ package com.example.recent_servers.presentation
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -50,13 +47,14 @@ fun RecentServers(
 @Preview
 @Composable
 fun blah() {
+    val state = mutableStateOf(listOf(
+        JellyFinServer("blah.com", JellyFinServerType.RECENT),
+        JellyFinServer("somewebsite.com", JellyFinServerType.RECENT_AND_DISCOVERED),
+        JellyFinServer("blah.com"),
+        JellyFinServer("blah.com"),
+    ))
     Scaffold {
-        RecentServers(state = mutableStateOf(listOf(
-            JellyFinServer("blah.com", JellyFinServerType.RECENT),
-            JellyFinServer("somewebsite.com", JellyFinServerType.RECENT_AND_DISCOVERED),
-            JellyFinServer("blah.com"),
-            JellyFinServer("blah.com"),
-        )))
+        RecentServers(state = remember { state })
     }
 }
 
