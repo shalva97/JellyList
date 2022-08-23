@@ -36,11 +36,13 @@ class LoginScreenViewModel constructor(
     }
 
     private fun authenticate() = viewModelScope.launch(exceptionHandler) {
+        loading.value = true
         jellyFinApiClient.authenticate(
             username = authDetails.username.value,
             password = authDetails.password.value,
         )
         navigateToHome.trySend(Unit)
+        loading.value = false
     }
 
     fun serverTrailingIconClicked() {
@@ -51,9 +53,11 @@ class LoginScreenViewModel constructor(
     }
 
     private fun connectToServer(jellyFinServer: String) = viewModelScope.launch(exceptionHandler) {
+        loading.value = true
         val recommendedServer = jellyFinClient.findRecommendedServer(jellyFinServer)
         jellyFinApiClient.baseUrl = recommendedServer.address
         showAuthFields.value = true
+        loading.value = false
 //        recentServersRepo.saveServer(recommendedServer.address)
     }
 
@@ -69,6 +73,7 @@ class LoginScreenViewModel constructor(
 
     private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
         errors.value = Errors.BadServer
+        loading.value = false
     }
 }
 

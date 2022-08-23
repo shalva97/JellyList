@@ -51,7 +51,7 @@ fun RecentServers(
 @Composable
 fun blah() {
     Scaffold {
-        RecentServers(mutableStateOf(listOf(
+        RecentServers(state = mutableStateOf(listOf(
             JellyFinServer("blah.com", JellyFinServerType.RECENT),
             JellyFinServer("somewebsite.com", JellyFinServerType.RECENT_AND_DISCOVERED),
             JellyFinServer("blah.com"),

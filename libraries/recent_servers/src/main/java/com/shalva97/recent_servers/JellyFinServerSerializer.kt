@@ -13,7 +13,7 @@ import kotlinx.serialization.protobuf.ProtoBuf
 import java.io.InputStream
 import java.io.OutputStream
 
-object SettingsSerializer : Serializer<Set<JellyFinServer>> {
+object JellyFinServerSerializer : Serializer<Set<JellyFinServer>> {
     override val defaultValue: Set<JellyFinServer> = emptySet()
 
     override suspend fun readFrom(input: InputStream): Set<JellyFinServer> {

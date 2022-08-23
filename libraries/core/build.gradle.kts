@@ -12,4 +12,5 @@ java {
 dependencies {
     implementation(libs.protobuf)
     implementation(libs.jellyfin)
+    testImplementation(libs.koin.test)
 }

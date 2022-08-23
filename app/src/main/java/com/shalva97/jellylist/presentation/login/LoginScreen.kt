@@ -1,6 +1,7 @@
 package com.shalva97.jellylist.presentation.login
 
 import android.view.KeyEvent.KEYCODE_ENTER
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -37,10 +37,12 @@ fun LoginScreen(backToHome: () -> Boolean) {
         }
     }
 
+    BackHandler(enabled = true) {}
+
     val errors = viewModel.errors
 
     if (viewModel.loading.value) {
-        LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+        LinearIndeterminateProgressIndicator(modifier = Modifier.fillMaxWidth())
     }
 
     Image(painter = painterResource(id = drawable.il_orbit_compass_save_on_booking),
@@ -120,6 +122,9 @@ fun LoginScreen(backToHome: () -> Boolean) {
                 Text(text = "Discover")
             }
             ButtonPrimary(
+                modifier = Modifier
+                    .height(42.dp)
+                    .width(64.dp),
                 onClick = {
                     viewModel.onNextButtonClicked()
                 },

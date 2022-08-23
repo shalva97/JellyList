@@ -10,11 +10,9 @@ import com.shalva97.jellylist.domain.User
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import org.jellyfin.sdk.api.client.ApiClient
-import org.jellyfin.sdk.api.client.extensions.authenticateUserByName
-import org.jellyfin.sdk.api.client.extensions.userApi
-import org.jellyfin.sdk.api.client.extensions.userLibraryApi
-import org.jellyfin.sdk.api.client.extensions.videosApi
+import org.jellyfin.sdk.api.client.extensions.*
 import org.jellyfin.sdk.model.api.BaseItemDto
+import org.jellyfin.sdk.model.api.SortOrder
 import org.jellyfin.sdk.model.api.UserDto
 import java.util.*
 

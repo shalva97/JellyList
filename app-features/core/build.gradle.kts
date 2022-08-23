@@ -32,9 +32,10 @@ android {
 
 dependencies {
     implementation(project(":libraries:jellyfin"))
-    implementation(libs.bundles.androidx.compose)
     implementation(libs.jellyfin)
-    implementation(libs.koin.android)
+    api(libs.bundles.kiwi)
+    api(libs.koin.android)
+    api(libs.koin.compose)
     debugImplementation(libs.bundles.androidx.compose.tooling)
     androidTestImplementation(libs.bundles.androidx.androidTests)
     testImplementation(libs.junit)

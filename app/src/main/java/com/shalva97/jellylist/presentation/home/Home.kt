@@ -1,5 +1,7 @@
 package com.shalva97.jellylist.presentation.home
 
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -32,7 +34,7 @@ fun Home(navigateToLogin: () -> Unit = { }) {
     Column(modifier = Modifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState())
-        .systemBarsPadding()) {
+        .systemBarsPadding(), verticalArrangement = Arrangement.Bottom) {
 
         movies.value.forEach {
             ListChoice(onClick = { viewModel.openVideoByExternalApp(it) }) {
