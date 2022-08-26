@@ -3,7 +3,6 @@ package com.example.recent_servers.presentation
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -13,6 +12,7 @@ import com.shalva97.core.JellyFinServer
 import com.shalva97.core.JellyFinServerType
 import kiwi.orbit.compose.ui.controls.ListChoice
 import kiwi.orbit.compose.ui.controls.Scaffold
+import kiwi.orbit.compose.ui.controls.Text
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.context.startKoin
