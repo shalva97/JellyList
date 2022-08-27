@@ -1,7 +1,7 @@
 package data
 
 import androidx.datastore.core.DataStore
-import com.shalva97.core.JellyFinServer
+import com.shalva97.core.models.JellyFinServer
 import kotlinx.coroutines.flow.*
 import org.jellyfin.sdk.Jellyfin
 import org.jellyfin.sdk.discovery.RecommendedServerInfo

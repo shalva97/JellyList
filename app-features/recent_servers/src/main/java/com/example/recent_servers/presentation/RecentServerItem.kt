@@ -8,8 +8,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.recent_servers.di.recentServersModule
-import com.shalva97.core.JellyFinServer
-import com.shalva97.core.JellyFinServerType
+import com.shalva97.core.models.JellyFinServer
+import com.shalva97.core.models.JellyFinServerType
 import kiwi.orbit.compose.ui.controls.ListChoice
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
@@ -49,12 +49,18 @@ fun RecentServers(
 @Composable
 fun blah() {
     @SuppressLint("UnrememberedMutableState")
-    val state = mutableStateOf(listOf(
-        JellyFinServer("blah.com", JellyFinServerType.RECENT),
-        JellyFinServer("somewebsite.com", JellyFinServerType.RECENT_AND_DISCOVERED),
-        JellyFinServer("blah.com"),
-        JellyFinServer("blah.com"),
-    ))
+    val state = mutableStateOf(
+        listOf(
+            JellyFinServer("blah.com", JellyFinServerType.RECENT, name = "Some Linux"),
+            JellyFinServer(
+                "somewebsite.com",
+                JellyFinServerType.RECENT_AND_DISCOVERED,
+                name = "Some Linux"
+            ),
+            JellyFinServer("blah.com", name = "Arch Linux"),
+            JellyFinServer("blah.com", name = "Ubuntu Linux"),
+        )
+    )
     Scaffold {
         RecentServers(state = remember { state })
     }

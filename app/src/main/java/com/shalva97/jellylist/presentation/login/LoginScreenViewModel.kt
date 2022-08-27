@@ -4,7 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shalva97.core.JellyFinServer
+import com.shalva97.core.models.JellyFinServer
 import com.shalva97.jellylist.data.JellyFinApiClientRepo
 import data.JellyFinRepo
 import kotlinx.coroutines.CoroutineExceptionHandler

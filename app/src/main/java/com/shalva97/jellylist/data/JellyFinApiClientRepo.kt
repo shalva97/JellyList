@@ -6,7 +6,6 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.shalva97.jellylist.domain.User
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import org.jellyfin.sdk.api.client.ApiClient
@@ -15,12 +14,11 @@ import org.jellyfin.sdk.api.client.extensions.userApi
 import org.jellyfin.sdk.api.client.extensions.userLibraryApi
 import org.jellyfin.sdk.api.client.extensions.videosApi
 import org.jellyfin.sdk.model.api.BaseItemDto
-import org.jellyfin.sdk.model.api.UserDto
 import java.util.*
-
 
 // TODO move to another module
 // remove key/value based presistence
+// separate authentication class
 class JellyFinApiClientRepo constructor(
     private val apiClient: ApiClient,
     private val context: Context,
@@ -69,10 +67,6 @@ class JellyFinApiClientRepo constructor(
 
         return movies.content
     }
-}
-
-private fun UserDto.toDomainModel(): User {
-    return User(name!!, id, hasPassword)
 }
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "token")

@@ -1,6 +1,6 @@
 package com.shalva97.cli
 
-import com.shalva97.core.JellyFinServer
+import com.shalva97.core.models.JellyFinServer
 import data.JellyFinRepo
 import di.jellyFinModule
 import kotlinx.coroutines.runBlocking

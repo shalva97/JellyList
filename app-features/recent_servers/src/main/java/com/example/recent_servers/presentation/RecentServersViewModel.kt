@@ -2,7 +2,7 @@ package com.example.recent_servers.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shalva97.core.JellyFinServer
+import com.shalva97.core.models.JellyFinServer
 import data.JellyFinRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

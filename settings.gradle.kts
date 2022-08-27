@@ -21,3 +21,4 @@ include(":app",
     ":app-features:recent_servers")
 include(":app-features:core")
 include(":libraries:core")
+include(":app-features:screens:login")
