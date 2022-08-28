@@ -5,8 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shalva97.jellylist.data.JellyfinMediaRepo
 import data.JellyFinAuthRepo
+import data.JellyfinMediaRepo
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow

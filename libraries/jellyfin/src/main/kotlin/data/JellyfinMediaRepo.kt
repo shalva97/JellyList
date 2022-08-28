@@ -1,4 +1,4 @@
-package com.shalva97.jellylist.data
+package data
 
 import org.jellyfin.sdk.api.client.ApiClient
 import org.jellyfin.sdk.api.client.extensions.userLibraryApi
@@ -6,6 +6,7 @@ import org.jellyfin.sdk.api.client.extensions.videosApi
 import org.jellyfin.sdk.model.api.BaseItemDto
 import java.util.*
 
+// move to another module
 class JellyfinMediaRepo constructor(
     private val apiClient: ApiClient,
 ) {
