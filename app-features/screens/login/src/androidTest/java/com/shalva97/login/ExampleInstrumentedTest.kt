@@ -15,11 +15,6 @@ import org.koin.core.context.startKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 @RunWith(AndroidJUnit4::class)
 @Ignore("A learning test")
 class DatastoreLearningTest : KoinTest {

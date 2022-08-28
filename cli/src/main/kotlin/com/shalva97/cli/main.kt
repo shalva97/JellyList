@@ -1,7 +1,7 @@
 package com.shalva97.cli
 
 import com.shalva97.core.models.JellyFinServer
-import data.JellyFinRepo
+import data.JellyFinServerRepo
 import di.jellyFinModule
 import kotlinx.coroutines.runBlocking
 import org.koin.core.component.KoinComponent
@@ -19,7 +19,7 @@ import kotlin.system.exitProcess
 )
 class CLI : Callable<Int>, KoinComponent {
 
-    private val jellyFinRepo: JellyFinRepo by inject()
+    private val jellyFinRepo: JellyFinServerRepo by inject()
 
     @CommandLine.Option(names = ["-d", "--discover"], description = ["Discover servers"])
     var discover = false

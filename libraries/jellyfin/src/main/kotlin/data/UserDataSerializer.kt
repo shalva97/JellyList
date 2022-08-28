@@ -30,4 +30,4 @@ object UserDataSerializer : Serializer<LogInState> {
     }
 }
 
-const val USER_DATA_FILE = "UserDataSerializer.pb"
+const val USER_DATA = "UserDataSerializer.pb"

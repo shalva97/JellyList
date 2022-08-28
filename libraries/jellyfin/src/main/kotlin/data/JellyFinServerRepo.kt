@@ -8,7 +8,7 @@ import org.jellyfin.sdk.discovery.RecommendedServerInfo
 import org.jellyfin.sdk.discovery.RecommendedServerInfoScore
 import org.jellyfin.sdk.model.api.ServerDiscoveryInfo
 
-class JellyFinRepo constructor(
+class JellyFinServerRepo constructor(
     private val jellyFin: Jellyfin,
     private val recentServersStore: DataStore<Set<JellyFinServer>>,
 ) {

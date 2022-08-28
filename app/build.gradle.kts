@@ -52,6 +52,7 @@ android {
 
 dependencies {
     implementation(project(":app-features:recent_servers"))
+    implementation(project(":app-features:screens:login"))
 
     implementation(libs.bundles.kiwi)
     implementation(libs.androidx.compose.navigation)

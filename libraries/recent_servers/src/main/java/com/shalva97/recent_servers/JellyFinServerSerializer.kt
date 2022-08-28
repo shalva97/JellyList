@@ -33,4 +33,4 @@ object JellyFinServerSerializer : Serializer<Set<JellyFinServer>> {
     }
 }
 
-const val RECENT_SERVERS_FILE_NAME = "JellyFinServerSerializer.pb"
+const val RECENT_SERVERS = "JellyFinServerSerializer.pb"
