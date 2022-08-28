@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import com.shalva97.core.models.JellyFinServer
-import com.shalva97.recent_servers.JellyFinServerSerializer
-import com.shalva97.recent_servers.RECENT_SERVERS
+import com.shalva97.serializers.JellyFinServerSerializer
+import com.shalva97.serializers.RECENT_SERVERS
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 

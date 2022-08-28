@@ -1,8 +1,8 @@
 package data
 
 import androidx.datastore.core.DataStore
+import com.shalva97.core.models.LogInState
 import kotlinx.coroutines.flow.first
-import models.LogInState
 import org.jellyfin.sdk.api.client.ApiClient
 import org.jellyfin.sdk.api.client.extensions.authenticateUserByName
 import org.jellyfin.sdk.api.client.extensions.userApi

@@ -1,4 +1,4 @@
-package models
+package com.shalva97.core.models
 
 import kotlinx.serialization.Serializable
 

@@ -14,11 +14,13 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "JellyList"
-include(":app",
+include(
+    ":app",
     ":cli",
     ":libraries:jellyfin",
-    ":libraries:recent_servers",
-    ":app-features:recent_servers")
+    ":libraries:serializers",
+    ":app-features:recent_servers"
+)
 include(":app-features:core")
 include(":libraries:core")
 include(":app-features:screens:login")
