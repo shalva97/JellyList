@@ -2,10 +2,10 @@ package com.shalva97.jellylist
 
 import android.app.Application
 import com.example.recent_servers.di.recentServersModule
-import com.shalva97.jellylist.data.JellyfinMediaRepo
 import com.shalva97.jellylist.presentation.home.HomeViewModel
 import com.shalva97.jellylist.presentation.login.LoginScreenViewModel
 import com.shalva97.login.userDataDatastoreModule
+import data.JellyfinMediaRepo
 import di.jellyFinModule
 import kotlinx.coroutines.Dispatchers
 import org.jellyfin.sdk.Jellyfin
