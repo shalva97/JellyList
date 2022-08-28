@@ -14,5 +14,7 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.androidx.datastore.core)
     api(project(":libraries:core"))
+    implementation(project(":libraries:recent_servers"))
     testImplementation(libs.koin.test)
+    implementation(libs.protobuf)
 }
