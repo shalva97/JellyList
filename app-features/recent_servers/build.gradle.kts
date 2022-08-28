@@ -37,7 +37,7 @@ android {
 }
 
 dependencies {
-    api(project(":libraries:recent_servers"))
+    implementation(project(":libraries:serializers"))
     api(project(":libraries:jellyfin"))
     api(project(":app-features:core"))
     implementation(libs.protobuf)

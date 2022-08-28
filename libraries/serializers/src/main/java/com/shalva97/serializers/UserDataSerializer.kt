@@ -1,12 +1,12 @@
-package data
+package com.shalva97.serializers
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
+import com.shalva97.core.models.LogInState
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.encodeToByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
-import models.LogInState
 import java.io.InputStream
 import java.io.OutputStream
 

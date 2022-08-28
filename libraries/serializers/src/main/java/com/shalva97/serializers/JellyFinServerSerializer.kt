@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalSerializationApi::class)
 
-package com.shalva97.recent_servers
+package com.shalva97.serializers
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer

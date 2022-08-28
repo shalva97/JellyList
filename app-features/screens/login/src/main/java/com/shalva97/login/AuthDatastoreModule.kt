@@ -3,9 +3,9 @@ package com.shalva97.login
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
-import data.USER_DATA
-import data.UserDataSerializer
-import models.LogInState
+import com.shalva97.core.models.LogInState
+import com.shalva97.serializers.USER_DATA
+import com.shalva97.serializers.UserDataSerializer
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 

@@ -3,9 +3,9 @@ package com.shalva97.login
 import androidx.datastore.core.DataStore
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.shalva97.core.models.LogInState
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import models.LogInState
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test

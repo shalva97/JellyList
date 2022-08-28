@@ -1,9 +1,9 @@
 package di
 
-import com.shalva97.recent_servers.RECENT_SERVERS
+import com.shalva97.serializers.RECENT_SERVERS
+import com.shalva97.serializers.USER_DATA
 import data.JellyFinAuthRepo
 import data.JellyFinServerRepo
-import data.USER_DATA
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 

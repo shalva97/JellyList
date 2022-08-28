@@ -34,6 +34,7 @@ android {
 
 dependencies {
     api(project(":libraries:jellyfin"))
+    api(project(":libraries:serializers"))
     api(project(":app-features:core"))
     implementation(libs.androidx.datastore)
     implementation(libs.bundles.androidx.compose)
