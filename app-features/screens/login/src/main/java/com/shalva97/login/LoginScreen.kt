@@ -1,4 +1,4 @@
-package com.shalva97.jellylist.presentation.login
+package com.shalva97.login
 
 import android.view.KeyEvent.KEYCODE_ENTER
 import androidx.activity.compose.BackHandler

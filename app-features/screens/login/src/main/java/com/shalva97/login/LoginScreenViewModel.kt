@@ -1,4 +1,4 @@
-package com.shalva97.jellylist.presentation.login
+package com.shalva97.login
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
