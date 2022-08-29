@@ -41,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = ("1.2.0")
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
     packagingOptions {
         resources {
@@ -51,8 +51,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":app-features:recent_servers"))
     implementation(project(":app-features:screens:login"))
+    implementation(project(":app-features:screens:home"))
 
     implementation(libs.bundles.kiwi)
     implementation(libs.androidx.compose.navigation)

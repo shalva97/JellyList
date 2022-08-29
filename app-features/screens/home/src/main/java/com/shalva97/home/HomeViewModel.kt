@@ -1,4 +1,4 @@
-package com.shalva97.jellylist.presentation.home
+package com.shalva97.home
 
 import android.content.Context
 import android.content.Intent
