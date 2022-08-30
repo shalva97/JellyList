@@ -24,3 +24,4 @@ include(
 include(":app-features:core")
 include(":libraries:core")
 include(":app-features:screens:login")
+include(":app-features:screens:home")

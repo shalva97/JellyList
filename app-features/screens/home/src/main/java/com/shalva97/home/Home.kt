@@ -1,4 +1,4 @@
-package com.shalva97.jellylist.presentation.home
+package com.shalva97.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

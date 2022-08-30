@@ -40,10 +40,9 @@ android {
 
 dependencies {
     api(project(":libraries:jellyfin"))
-    api(project(":libraries:serializers"))
     api(project(":app-features:core"))
-    api(project(":app-features:recent_servers"))
-    implementation(libs.androidx.datastore)
+    api(project(":libraries:jellyfin"))
+    implementation(libs.jellyfin)
     implementation(libs.bundles.androidx.compose)
     debugImplementation(libs.bundles.androidx.compose.tooling)
     androidTestImplementation(libs.bundles.androidx.androidTests)
