@@ -2,11 +2,11 @@ package data
 
 import org.jellyfin.sdk.api.client.ApiClient
 import org.jellyfin.sdk.api.client.extensions.userLibraryApi
+import org.jellyfin.sdk.api.client.extensions.userViewsApi
 import org.jellyfin.sdk.api.client.extensions.videosApi
 import org.jellyfin.sdk.model.api.BaseItemDto
 import java.util.*
 
-// move to another module
 class JellyfinMediaRepo constructor(
     private val apiClient: ApiClient,
 ) {
@@ -23,5 +23,10 @@ class JellyfinMediaRepo constructor(
         val movies = apiClient.userLibraryApi.getLatestMedia()
 
         return movies.content
+    }
+
+    // TODO this will return the list of user media folders
+    suspend fun userMedia() {
+        val mediaItems = apiClient.userViewsApi.getUserViews()
     }
 }

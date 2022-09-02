@@ -5,10 +5,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shalva97.core.models.JellyFinServer
+import com.shalva97.core.withLoader
 import data.JellyFinAuthRepo
 import data.JellyFinServerRepo
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class LoginScreenViewModel constructor(
@@ -19,7 +21,7 @@ class LoginScreenViewModel constructor(
     val server = mutableStateOf("192.168.")
     val errors = mutableStateOf<Errors>(Errors.NoErrors)
     val showAuthFields = mutableStateOf(false)
-    val loading = mutableStateOf(false)
+    val loading = MutableStateFlow(false)
     val authDetails = AuthDetails()
     val navigateToHome = Channel<Unit>()
 
@@ -36,14 +38,12 @@ class LoginScreenViewModel constructor(
     }
 
     private fun authenticate() = viewModelScope.launch(exceptionHandler) {
-        loading.value = true
         jellyFinAuthRepo.authenticate(
             username = authDetails.username.value,
             password = authDetails.password.value,
         )
         navigateToHome.trySend(Unit)
-        loading.value = false
-    }
+    }.withLoader(loading)
 
     fun serverTrailingIconClicked() {
         if (showAuthFields.value.not()) {
@@ -53,12 +53,10 @@ class LoginScreenViewModel constructor(
     }
 
     private fun connectToServer(jellyFinServer: String) = viewModelScope.launch(exceptionHandler) {
-        loading.value = true
         val recommendedServer = jellyFinClient.findRecommendedServer(jellyFinServer)
         jellyFinAuthRepo.baseUrl = recommendedServer.address
         showAuthFields.value = true
-        loading.value = false
-    }
+    }.withLoader(loading)
 
     fun onRecentServerClicked(url: String) {
         server.value = url
