@@ -11,6 +11,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -45,7 +46,7 @@ fun LoginScreen(backToHome: () -> Boolean) {
 
     val errors = viewModel.errors
 
-    if (viewModel.loading.value) {
+    if (viewModel.loading.collectAsState().value) {
         LinearIndeterminateProgressIndicator(modifier = Modifier.fillMaxWidth())
     }
 
