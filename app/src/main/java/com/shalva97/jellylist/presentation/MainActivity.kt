@@ -40,7 +40,9 @@ class MainActivity : ComponentActivity() {
                         darkIcons = isSystemInDarkTheme.not()
                     )
                 }
-                Box(modifier = Modifier.background(color = OrbitTheme.colors.surface.main)) {
+                Box(
+                    modifier = Modifier.background(color = OrbitTheme.colors.surface.main)
+                ) {
                     JellyList()
                 }
             }
@@ -53,7 +55,11 @@ fun JellyList() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "home") {
-        composable("login") { LoginScreen { navController.popBackStack("home", inclusive = true) } }
+        composable("login") {
+            LoginScreen {
+                navController.popBackStack("home", inclusive = true)
+            }
+        }
         composable("home") {
             Home { navController.navigate("login") }
         }

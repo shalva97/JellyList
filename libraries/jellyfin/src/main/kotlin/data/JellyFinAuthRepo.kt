@@ -43,4 +43,7 @@ class JellyFinAuthRepo constructor(
         }
     }
 
+    suspend fun clearUserData() {
+        loginDataStore.updateData { LogInState.NotLoggedIn }
+    }
 }
