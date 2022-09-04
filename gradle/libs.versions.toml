@@ -47,3 +47,5 @@ kiwi = ["kiwi-icons", "kiwi-ui", "kiwi-illustrations"]
 androidx-androidTests = ["androidx-test-coreKtx", "koin-test", "androidx-test-runner", "androidx-test-rules", "androidx-test-core-junitKtx"]
 androidx-compose = ["androidx-compose-foundation", "koin-compose", "androidx-compose-tooling-preview", "androidx-compose-ui", "androidx-compose-material", "androidx-compose-activity", ]
 androidx-compose-tooling = ["androidx-compose-tooling-poolingcontainer", "androidx-compose-tooling"]
+test-unit = ["mockk", "junit", "robolectric"]
+# TODO add test-android for android tests
