@@ -7,7 +7,7 @@ import org.jellyfin.sdk.api.client.extensions.videosApi
 import org.jellyfin.sdk.model.api.BaseItemDto
 import java.util.*
 
-class JellyfinMediaRepo constructor(
+class JellyfinMediaRepo(
     private val apiClient: ApiClient,
 ) {
 

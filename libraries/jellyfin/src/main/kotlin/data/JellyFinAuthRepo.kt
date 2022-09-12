@@ -8,7 +8,7 @@ import org.jellyfin.sdk.api.client.extensions.authenticateUserByName
 import org.jellyfin.sdk.api.client.extensions.userApi
 import java.util.*
 
-class JellyFinAuthRepo constructor(
+class JellyFinAuthRepo(
     private val apiClient: ApiClient,
     private val loginDataStore: DataStore<LogInState>
 ) {
