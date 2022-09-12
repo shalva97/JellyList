@@ -11,6 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.ButtonLinkPrimary
 import kiwi.orbit.compose.ui.controls.Icon
@@ -40,7 +41,9 @@ fun Home(navigateToLogin: () -> Unit = { }) {
     ) {
         val (logoutButton, content, bottomNavigation) = createRefs()
 
-        ButtonLinkPrimary(onClick = { /*TODO*/ }, modifier = Modifier.constrainAs(logoutButton) {
+        ButtonLinkPrimary(onClick = {
+            viewModel.logout()
+        }, modifier = Modifier.constrainAs(logoutButton) {
             top.linkTo(parent.top)
             end.linkTo(parent.end)
         }) {
@@ -55,6 +58,7 @@ fun Home(navigateToLogin: () -> Unit = { }) {
                     end.linkTo(parent.end)
                     start.linkTo(parent.start)
                     bottom.linkTo(bottomNavigation.top)
+                    height = Dimension.fillToConstraints
                 }, verticalArrangement = Arrangement.Bottom
         ) {
             movies.value.forEach {

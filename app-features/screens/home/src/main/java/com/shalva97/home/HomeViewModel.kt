@@ -50,4 +50,9 @@ class HomeViewModel(
             }
         }
     }
+
+    fun logout() = viewModelScope.launch {
+        authRepo.clearUserData()
+        navigateToLogin.trySend(Unit)
+    }
 }
