@@ -26,7 +26,8 @@ fun Home(navigateToLogin: () -> Unit = { }) {
 
     val viewModel = koinViewModel<HomeViewModel>()
 
-    LaunchedEffect(key1 = "nav") {
+    LaunchedEffect(key1 = "initialize") {
+        viewModel.initialize()
         viewModel.navigateToLogin.consumeEach {
             navigateToLogin.invoke()
         }

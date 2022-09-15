@@ -24,7 +24,7 @@ class HomeViewModel(
     val navigateToLogin = Channel<Unit>(capacity = 1)
     private val exceptionHandler = createExceptionHandler()
 
-    init {
+    fun initialize() {
         viewModelScope.launch(exceptionHandler) {
             authRepo.loadUserData()
             movies.emit(jellyfinMediaRepo.latestMovies())
