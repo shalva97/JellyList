@@ -12,6 +12,7 @@ class JellyFinAuthRepo(
     private val apiClient: ApiClient,
     private val loginDataStore: DataStore<LogInState>
 ) {
+
     var baseUrl: String? = null
         get() = apiClient.baseUrl
         set(value) {

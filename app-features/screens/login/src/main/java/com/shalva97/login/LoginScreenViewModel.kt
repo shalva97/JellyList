@@ -18,7 +18,7 @@ class LoginScreenViewModel constructor(
     private val jellyFinAuthRepo: JellyFinAuthRepo
 ) : ViewModel() {
 
-    val server = mutableStateOf("192.168.")
+    val server = mutableStateOf("192.168.88.206")
     val errors = mutableStateOf<Errors>(Errors.NoErrors)
     val showAuthFields = mutableStateOf(false)
     val loading = MutableStateFlow(false)

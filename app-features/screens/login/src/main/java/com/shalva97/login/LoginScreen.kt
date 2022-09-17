@@ -30,7 +30,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalComposeUiApi::class)
 @Composable
-fun LoginScreen(backToHome: () -> Boolean) {
+fun LoginScreen(backToHome: () -> Unit) {
 
     LocalSoftwareKeyboardController.current?.show()
 

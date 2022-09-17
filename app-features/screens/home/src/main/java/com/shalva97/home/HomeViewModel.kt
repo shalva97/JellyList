@@ -9,8 +9,8 @@ import data.JellyFinAuthRepo
 import data.JellyfinMediaRepo
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.jellyfin.sdk.model.api.BaseItemDto
 
@@ -20,14 +20,16 @@ class HomeViewModel(
     private val context: Context,
 ) : ViewModel() {
 
-    val movies = MutableStateFlow<List<BaseItemDto>>(emptyList())
-    val navigateToLogin = Channel<Unit>(capacity = 1)
+    val state = MutableStateFlow<HomeState>(HomeState.Loading)
+
     private val exceptionHandler = createExceptionHandler()
 
-    fun initialize() {
+    init {
         viewModelScope.launch(exceptionHandler) {
             authRepo.loadUserData()
-            movies.emit(jellyfinMediaRepo.latestMovies())
+            state.update {
+                HomeState.Content(jellyfinMediaRepo.latestMovies())
+            }
         }
     }
 
@@ -44,7 +46,7 @@ class HomeViewModel(
         return CoroutineExceptionHandler { _, exception ->
             when (exception) {
                 is IllegalStateException -> {
-                    navigateToLogin.trySend(Unit)
+                    state.update { HomeState.NavigateToLogin }
                 }
                 else -> exception.printStackTrace()
             }
@@ -53,6 +55,16 @@ class HomeViewModel(
 
     fun logout() = viewModelScope.launch {
         authRepo.clearUserData()
-        navigateToLogin.trySend(Unit)
+        state.update { HomeState.NavigateToLogin }
     }
+
+    fun navigationEventConsumed() {
+        state.update { HomeState.Loading }
+    }
+}
+
+sealed interface HomeState {
+    object Loading : HomeState
+    object NavigateToLogin : HomeState
+    data class Content(val movies: List<BaseItemDto> = emptyList()) : HomeState
 }
