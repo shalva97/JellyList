@@ -10,11 +10,11 @@ java {
 }
 
 dependencies {
+    api(project(":libraries:core"))
+    implementation(project(":libraries:serializers"))
     implementation(libs.jellyfin)
     implementation(libs.koin.core)
     implementation(libs.androidx.datastore.core)
-    api(project(":libraries:core"))
-    implementation(project(":libraries:serializers"))
-    testImplementation(libs.koin.test)
     implementation(libs.protobuf)
+    testImplementation(libs.koin.test)
 }

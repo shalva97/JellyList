@@ -8,10 +8,11 @@ import org.jellyfin.sdk.api.client.extensions.authenticateUserByName
 import org.jellyfin.sdk.api.client.extensions.userApi
 import java.util.*
 
-class JellyFinAuthRepo constructor(
+class JellyFinAuthRepo(
     private val apiClient: ApiClient,
     private val loginDataStore: DataStore<LogInState>
 ) {
+
     var baseUrl: String? = null
         get() = apiClient.baseUrl
         set(value) {
@@ -25,7 +26,7 @@ class JellyFinAuthRepo constructor(
             apiClient.accessToken = state.token
             apiClient.userId = UUID.fromString(state.userName)
             apiClient.baseUrl = state.baseUrl
-        } else throw IllegalStateException("No auth token saved to device")
+        } else throw IllegalStateException("No auth token is saved to device")
     }
 
     suspend fun authenticate(password: String, username: String) {

@@ -57,7 +57,10 @@ fun JellyList() {
     NavHost(navController = navController, startDestination = "home") {
         composable("login") {
             LoginScreen {
-                navController.popBackStack("home", inclusive = true)
+                navController.popBackStack()
+                val id = navController.currentDestination?.id
+                navController.popBackStack()
+                navController.navigate(id ?: return@LoginScreen)
             }
         }
         composable("home") {
