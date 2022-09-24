@@ -1,6 +1,10 @@
 package com.shalva97.home
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigation
@@ -9,11 +13,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import kiwi.orbit.compose.icons.Icons
-import kiwi.orbit.compose.ui.controls.*
+import kiwi.orbit.compose.ui.controls.ButtonLinkPrimary
+import kiwi.orbit.compose.ui.controls.Icon
+import kiwi.orbit.compose.ui.controls.ListChoice
+import kiwi.orbit.compose.ui.controls.Text
 import org.jellyfin.sdk.model.api.BaseItemDto
 import org.koin.androidx.compose.koinViewModel
 
@@ -24,16 +32,24 @@ fun Home(navigateToLogin: () -> Unit = { }) {
     val viewModel = koinViewModel<HomeViewModel>()
     val homeState by viewModel.state.collectAsState()
 
+
     when (homeState) {
         is HomeState.Content -> {
             Content(
-                homeState as HomeState.Content,
-                viewModel::logout,
-                viewModel::openVideoByExternalApp
+                modifier = Modifier
+//                    .systemBarsPadding()
+                    .fillMaxSize(),
+                state = homeState as HomeState.Content,
+                onLogoutClick = viewModel::logout,
+                onItemClick = viewModel::openVideoByExternalApp
             )
         }
-        HomeState.Loading ->
-            LinearIndeterminateProgressIndicator(modifier = Modifier.fillMaxWidth())
+        HomeState.Loading -> {
+//            Box(modifier = Modifier.fillMaxSize()) {
+//                LinearIndeterminateProgressIndicator(Modifier.fillMaxWidth())
+//            }
+            Text(text = "asdasdas")
+        }
         HomeState.NavigateToLogin -> {
             navigateToLogin.invoke()
             viewModel.navigationEventConsumed()
@@ -43,19 +59,18 @@ fun Home(navigateToLogin: () -> Unit = { }) {
 
 @Composable
 fun Content(
-    homeState: HomeState.Content,
-    logout: () -> Unit = {},
-    openVideoByExternalApp: (BaseItemDto) -> Unit = {}
+    modifier: Modifier = Modifier,
+    state: HomeState.Content,
+    onLogoutClick: () -> Unit = {},
+    onItemClick: (BaseItemDto) -> Unit = {}
 ) {
     ConstraintLayout(
-        modifier = Modifier
-            .fillMaxSize()
-            .systemBarsPadding()
+        modifier = modifier.background(Color.Red)
     ) {
         val (logoutButton, content, bottomNavigation) = createRefs()
 
         ButtonLinkPrimary(onClick = {
-            logout()
+            onLogoutClick()
         }, modifier = Modifier.constrainAs(logoutButton) {
             top.linkTo(parent.top)
             end.linkTo(parent.end)
@@ -74,8 +89,8 @@ fun Content(
                     height = Dimension.fillToConstraints
                 }, verticalArrangement = Arrangement.Bottom
         ) {
-            homeState.movies.forEach {
-                ListChoice(onClick = { openVideoByExternalApp(it) }) {
+            state.movies.forEach {
+                ListChoice(onClick = { onItemClick(it) }) {
                     Text(text = it.name ?: "Unknown")
                 }
             }

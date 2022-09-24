@@ -3,6 +3,7 @@ package com.shalva97.home
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import data.JellyFinAuthRepo
@@ -12,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.jellyfin.sdk.api.client.exception.TimeoutException
 import org.jellyfin.sdk.model.api.BaseItemDto
 
 class HomeViewModel(
@@ -45,7 +47,9 @@ class HomeViewModel(
     private fun createExceptionHandler(): CoroutineExceptionHandler {
         return CoroutineExceptionHandler { _, exception ->
             when (exception) {
-                is IllegalStateException -> {
+                is IllegalStateException,
+                is TimeoutException -> {
+                    Log.d("ass", "Exception................")
                     state.update { HomeState.NavigateToLogin }
                 }
                 else -> exception.printStackTrace()

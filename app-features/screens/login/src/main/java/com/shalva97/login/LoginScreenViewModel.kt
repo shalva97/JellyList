@@ -68,9 +68,10 @@ class LoginScreenViewModel constructor(
         connectToServer(jellyFinServer.address)
     }
 
-    private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
+    private val exceptionHandler = CoroutineExceptionHandler { _, e ->
         errors.value = Errors.BadServer
         loading.value = false
+        e.printStackTrace()
     }
 }
 
