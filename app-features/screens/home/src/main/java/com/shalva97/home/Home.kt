@@ -1,10 +1,6 @@
 package com.shalva97.home
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigation
@@ -13,15 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import kiwi.orbit.compose.icons.Icons
-import kiwi.orbit.compose.ui.controls.ButtonLinkPrimary
-import kiwi.orbit.compose.ui.controls.Icon
-import kiwi.orbit.compose.ui.controls.ListChoice
-import kiwi.orbit.compose.ui.controls.Text
+import kiwi.orbit.compose.ui.controls.*
 import org.jellyfin.sdk.model.api.BaseItemDto
 import org.koin.androidx.compose.koinViewModel
 
@@ -37,7 +29,7 @@ fun Home(navigateToLogin: () -> Unit = { }) {
         is HomeState.Content -> {
             Content(
                 modifier = Modifier
-//                    .systemBarsPadding()
+                    .systemBarsPadding()
                     .fillMaxSize(),
                 state = homeState as HomeState.Content,
                 onLogoutClick = viewModel::logout,
@@ -45,10 +37,10 @@ fun Home(navigateToLogin: () -> Unit = { }) {
             )
         }
         HomeState.Loading -> {
-//            Box(modifier = Modifier.fillMaxSize()) {
-//                LinearIndeterminateProgressIndicator(Modifier.fillMaxWidth())
-//            }
-            Text(text = "asdasdas")
+            // TODO remove box when https://github.com/androidx/constraintlayout/issues/739 is fixed
+            Box(modifier = Modifier.fillMaxSize()) {
+                LinearIndeterminateProgressIndicator(Modifier.fillMaxWidth())
+            }
         }
         HomeState.NavigateToLogin -> {
             navigateToLogin.invoke()
@@ -65,7 +57,7 @@ fun Content(
     onItemClick: (BaseItemDto) -> Unit = {}
 ) {
     ConstraintLayout(
-        modifier = modifier.background(Color.Red)
+        modifier = modifier
     ) {
         val (logoutButton, content, bottomNavigation) = createRefs()
 
