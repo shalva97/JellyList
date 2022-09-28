@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.jellyfin.sdk.api.client.exception.TimeoutException
 import org.jellyfin.sdk.model.api.BaseItemDto
+import java.util.*
 
 class HomeViewModel(
     private val jellyfinMediaRepo: JellyfinMediaRepo,
@@ -30,12 +31,13 @@ class HomeViewModel(
         viewModelScope.launch(exceptionHandler) {
             authRepo.loadUserData()
             state.update {
-                HomeState.Content(jellyfinMediaRepo.latestMovies())
+//                jellyfinMediaRepo.userMedia()
+                HomeState.Content(jellyfinMediaRepo.latestMovies().map { it.toUI() })
             }
         }
     }
 
-    fun openVideoByExternalApp(video: BaseItemDto) = viewModelScope.launch(Dispatchers.IO) {
+    fun openVideoByExternalApp(video: Item) = viewModelScope.launch(Dispatchers.IO) {
         val streamUrl = jellyfinMediaRepo.getItemInfo(video.id)
         val uri = Uri.parse(streamUrl)
         val intent = Intent(Intent.ACTION_VIEW, uri)
@@ -70,5 +72,13 @@ class HomeViewModel(
 sealed interface HomeState {
     object Loading : HomeState
     object NavigateToLogin : HomeState
-    data class Content(val movies: List<BaseItemDto> = emptyList()) : HomeState
+    data class Content(
+        val movies: List<Item> = emptyList(),
+    ) : HomeState
+}
+
+data class Item(val name: String, val id: UUID)
+
+private fun BaseItemDto.toUI(): Item {
+    return Item(name ?: "Unknown Item", id)
 }

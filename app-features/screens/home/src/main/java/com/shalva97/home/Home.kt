@@ -14,7 +14,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.*
-import org.jellyfin.sdk.model.api.BaseItemDto
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -54,7 +53,7 @@ fun Content(
     modifier: Modifier = Modifier,
     state: HomeState.Content,
     onLogoutClick: () -> Unit = {},
-    onItemClick: (BaseItemDto) -> Unit = {}
+    onItemClick: (Item) -> Unit = {}
 ) {
     ConstraintLayout(
         modifier = modifier
@@ -83,7 +82,7 @@ fun Content(
         ) {
             state.movies.forEach {
                 ListChoice(onClick = { onItemClick(it) }) {
-                    Text(text = it.name ?: "Unknown")
+                    Text(text = it.name)
                 }
             }
         }

@@ -5,6 +5,7 @@ import org.jellyfin.sdk.api.client.extensions.userLibraryApi
 import org.jellyfin.sdk.api.client.extensions.userViewsApi
 import org.jellyfin.sdk.api.client.extensions.videosApi
 import org.jellyfin.sdk.model.api.BaseItemDto
+import org.jellyfin.sdk.model.api.BaseItemDtoQueryResult
 import java.util.*
 
 class JellyfinMediaRepo(
@@ -25,8 +26,8 @@ class JellyfinMediaRepo(
         return movies.content
     }
 
-    // TODO this will return the list of user media folders
-    suspend fun userMedia() {
+    suspend fun userMedia(): BaseItemDtoQueryResult {
         val mediaItems = apiClient.userViewsApi.getUserViews()
+        return mediaItems.content
     }
 }
