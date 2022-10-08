@@ -108,6 +108,11 @@ fun Content(
                 text = "Continue watching",
                 style = OrbitTheme.typography.title3
             )
+            state.resumableContent.forEach {
+                ListChoice(onClick = { onItemClick(it.id) }) {
+                    Text(text = it.name)
+                }
+            }
         }
     }
 }

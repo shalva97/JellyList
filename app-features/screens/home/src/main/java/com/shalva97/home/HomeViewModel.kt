@@ -32,9 +32,11 @@ class HomeViewModel(
             authRepo.loadUserData()
             state.update {
                 HomeState.Content(
-                    recentFiles = jellyfinMediaRepo.latestMovies().map { it.toUI() },
-                    locations = jellyfinMediaRepo.userMedia().items?.map { it.toItemGroup() }
-                        ?: emptyList()
+                    recentFiles = jellyfinMediaRepo.latestContent().map { it.toUI() },
+                    locations = jellyfinMediaRepo.locations().items?.map { it.toItemGroup() }
+                        .orEmpty(),
+                    resumableContent = jellyfinMediaRepo.resumableContent().items?.map { it.toUI() }
+                        .orEmpty()
                 )
             }
         }
@@ -76,8 +78,9 @@ sealed interface HomeState {
     object Loading : HomeState
     object NavigateToLogin : HomeState
     data class Content(
+        val locations: List<ItemGroup> = ItemGroup.EMPTY,
         val recentFiles: List<Item> = emptyList(),
-        val locations: List<ItemGroup> = ItemGroup.EMPTY
+        val resumableContent: List<Item> = emptyList()
     ) : HomeState
 }
 
