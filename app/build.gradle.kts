@@ -8,6 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.shalva97.jellylist"
+        namespace = "com.shalva97.jellylist"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = libs.versions.versionCode.get().toInt()

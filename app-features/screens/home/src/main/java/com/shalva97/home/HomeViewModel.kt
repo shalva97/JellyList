@@ -31,14 +31,17 @@ class HomeViewModel(
         viewModelScope.launch(exceptionHandler) {
             authRepo.loadUserData()
             state.update {
-//                jellyfinMediaRepo.userMedia()
-                HomeState.Content(jellyfinMediaRepo.latestMovies().map { it.toUI() })
+                HomeState.Content(
+                    recentFiles = jellyfinMediaRepo.latestMovies().map { it.toUI() },
+                    locations = jellyfinMediaRepo.userMedia().items?.map { it.toItemGroup() }
+                        ?: emptyList()
+                )
             }
         }
     }
 
-    fun openVideoByExternalApp(video: Item) = viewModelScope.launch(Dispatchers.IO) {
-        val streamUrl = jellyfinMediaRepo.getItemInfo(video.id)
+    fun openVideoByExternalApp(id: UUID) = viewModelScope.launch(Dispatchers.IO) {
+        val streamUrl = jellyfinMediaRepo.getItemInfo(id)
         val uri = Uri.parse(streamUrl)
         val intent = Intent(Intent.ACTION_VIEW, uri)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -73,12 +76,22 @@ sealed interface HomeState {
     object Loading : HomeState
     object NavigateToLogin : HomeState
     data class Content(
-        val movies: List<Item> = emptyList(),
+        val recentFiles: List<Item> = emptyList(),
+        val locations: List<ItemGroup> = ItemGroup.EMPTY
     ) : HomeState
 }
 
 data class Item(val name: String, val id: UUID)
+data class ItemGroup(val name: String, val id: UUID, val items: List<Item>) {
+    companion object {
+        val EMPTY = emptyList<ItemGroup>()
+    }
+}
 
 private fun BaseItemDto.toUI(): Item {
     return Item(name ?: "Unknown Item", id)
+}
+
+private fun BaseItemDto.toItemGroup(): ItemGroup {
+    return ItemGroup(name ?: "Unknown Group", id, emptyList())
 }
