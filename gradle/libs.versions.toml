@@ -43,7 +43,7 @@ junit = "junit:junit:4.13.2"
 robolectric = "org.robolectric:robolectric:4.9"
 picocli = "info.picocli:picocli:4.6.3"
 picocli-codegen = "info.picocli:picocli-codegen:4.6.3"
-protobuf = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf:1.4.0"
+protobuf = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf:1.4.1"
 
 [bundles]
 kiwi = ["kiwi-icons", "kiwi-ui", "kiwi-illustrations"]
