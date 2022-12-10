@@ -12,8 +12,6 @@ java {
 dependencies {
     implementation(project(":libraries:jellyfin"))
     implementation(libs.jellyfin)
-    implementation(libs.picocli)
-    kapt(libs.picocli.codegen)
     implementation(libs.koin.core)
     testImplementation(libs.koin.test)
 }
