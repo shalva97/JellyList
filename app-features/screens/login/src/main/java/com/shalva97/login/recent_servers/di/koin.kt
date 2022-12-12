@@ -1,8 +1,8 @@
-package com.example.recent_servers.di
+package com.shalva97.login.recent_servers.di
 
-import com.example.recent_servers.data.recentServerDataStoreModule
-import com.example.recent_servers.presentation.RecentServersViewModel
 import com.shalva97.core.jellyfinClient
+import com.shalva97.login.recent_servers.data.recentServerDataStoreModule
+import com.shalva97.login.recent_servers.presentation.RecentServersViewModel
 import di.jellyFinModule
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module

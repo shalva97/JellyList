@@ -1,4 +1,4 @@
-package com.example.recent_servers.presentation
+package com.shalva97.login.recent_servers.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
@@ -7,9 +7,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.recent_servers.di.recentServersModule
 import com.shalva97.core.models.JellyFinServer
 import com.shalva97.core.models.JellyFinServerType
+import com.shalva97.login.recent_servers.di.recentServersModule
 import kiwi.orbit.compose.ui.controls.ListChoice
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text

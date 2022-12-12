@@ -1,4 +1,4 @@
-package com.example.recent_servers.presentation
+package com.shalva97.login.recent_servers.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

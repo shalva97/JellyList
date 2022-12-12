@@ -1,4 +1,4 @@
-package com.example.recent_servers.data
+package com.shalva97.login.recent_servers.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore
