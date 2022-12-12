@@ -6,7 +6,6 @@ import di.jellyFinModule
 import kotlinx.coroutines.runBlocking
 import org.koin.core.context.startKoin
 
-
 fun main(args: Array<String>) {
     val koin = startKoin {
 //        printLogger(Level.INFO)
@@ -26,5 +25,4 @@ fun main(args: Array<String>) {
     }
 
     if (servers.isEmpty()) println("no servers found")
-    println("hello cli client")
 }
