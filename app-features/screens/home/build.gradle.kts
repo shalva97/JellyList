@@ -36,6 +36,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
+    namespace = "com.shalva97.home"
 }
 
 dependencies {
