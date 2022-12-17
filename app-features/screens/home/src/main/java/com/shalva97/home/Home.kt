@@ -24,7 +24,6 @@ fun Home(navigateToLogin: () -> Unit = { }) {
     val viewModel = koinViewModel<HomeViewModel>()
     val homeState by viewModel.state.collectAsState()
 
-
     when (homeState) {
         is HomeState.Content -> {
             Content(
