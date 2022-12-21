@@ -5,7 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import com.shalva97.core.models.LogInState
 import com.shalva97.serializers.USER_DATA
-import com.shalva97.serializers.UserDataSerializer
+import com.shalva97.serializers.createProtobufSerializer
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
@@ -15,5 +15,5 @@ val userDataDatastoreModule = module {
 
 private val Context.userData: DataStore<LogInState> by dataStore(
     fileName = USER_DATA,
-    serializer = UserDataSerializer
+    serializer = createProtobufSerializer(LogInState.NotLoggedIn)
 )

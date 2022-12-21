@@ -33,3 +33,25 @@ object UserDataSerializer : Serializer<LogInState> {
 }
 
 const val USER_DATA = "UserDataSerializer.pb"
+
+inline fun <reified T> createProtobufSerializer(defaultValue: T): Serializer<T> {
+    return object : Serializer<T> {
+        override val defaultValue: T = defaultValue
+
+        override suspend fun readFrom(input: InputStream): T {
+            try {
+                return ProtoBuf.decodeFromByteArray(input.readBytes())
+            } catch (exception: SerializationException) {
+                throw CorruptionException("Cannot read proto.", exception)
+            }
+        }
+
+        override suspend fun writeTo(
+            t: T,
+            output: OutputStream,
+        ) {
+            val encodeToByteArray = ProtoBuf.encodeToByteArray(t)
+            output.write(encodeToByteArray)
+        }
+    }
+}
