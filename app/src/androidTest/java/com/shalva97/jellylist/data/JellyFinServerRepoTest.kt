@@ -5,7 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import androidx.test.core.app.ApplicationProvider
 import com.shalva97.jellylist.App
-import com.shalva97.serializers.USER_DATA
+import com.shalva97.login.USER_DATA
 import com.shalva97.serializers.createProtobufSerializer
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
