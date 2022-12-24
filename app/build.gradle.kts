@@ -22,6 +22,8 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
         release {
             isMinifyEnabled = true
@@ -45,9 +47,10 @@ android {
     }
     packagingOptions {
         resources {
-            excludes += ("/META-INF/{AL2.0,LGPL2.1}")
+            excludes += ("META-INF/*")
         }
     }
+    namespace = "com.shalva97.jellylist"
 }
 
 dependencies {
@@ -68,8 +71,7 @@ dependencies {
     implementation(libs.accompanist)
     implementation(libs.jellyfin)
     debugImplementation(libs.androidx.compose.tooling)
-    androidTestImplementation(libs.mockk.android)
-    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.bundles.androidx.androidTests)
     testImplementation(libs.mockk)
     testImplementation(libs.junit)
     testImplementation(libs.robolectric)

@@ -21,7 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.example.recent_servers.presentation.RecentServers
+import com.shalva97.login.recent_servers.presentation.RecentServers
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.illustrations.R.drawable
 import kiwi.orbit.compose.ui.controls.*

@@ -18,8 +18,7 @@ include(
     ":app",
     ":cli",
     ":libraries:jellyfin",
-    ":libraries:serializers",
-    ":app-features:recent_servers"
+    ":libraries:serializers"
 )
 include(":app-features:core")
 include(":libraries:core")

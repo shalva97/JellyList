@@ -2,7 +2,9 @@ package com.shalva97.serializers
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
-import com.shalva97.core.models.LogInState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.encodeToByteArray
@@ -10,10 +12,11 @@ import kotlinx.serialization.protobuf.ProtoBuf
 import java.io.InputStream
 import java.io.OutputStream
 
-object UserDataSerializer : Serializer<LogInState> {
-    override val defaultValue: LogInState = LogInState.NotLoggedIn
+@OptIn(ExperimentalSerializationApi::class)
+inline fun <reified T> createProtobufSerializer(defaultValue: T) = object : Serializer<T> {
+    override val defaultValue: T = defaultValue
 
-    override suspend fun readFrom(input: InputStream): LogInState {
+    override suspend fun readFrom(input: InputStream): T {
         try {
             return ProtoBuf.decodeFromByteArray(input.readBytes())
         } catch (exception: SerializationException) {
@@ -22,12 +25,15 @@ object UserDataSerializer : Serializer<LogInState> {
     }
 
     override suspend fun writeTo(
-        t: LogInState,
+        t: T,
         output: OutputStream,
     ) {
         val encodeToByteArray = ProtoBuf.encodeToByteArray(t)
-        output.write(encodeToByteArray)
+        withContext(Dispatchers.IO) {
+            output.write(encodeToByteArray)
+        }
     }
 }
 
 const val USER_DATA = "UserDataSerializer.pb"
+const val RECENT_SERVERS = "JellyFinServerSerializer.pb"

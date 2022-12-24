@@ -15,8 +15,12 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+            isShrinkResources = false
+        }
+        release {
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -28,7 +32,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     buildFeatures {
         compose = true
@@ -36,13 +40,13 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
+    namespace = "com.shalva97.login"
 }
 
 dependencies {
     api(project(":libraries:jellyfin"))
     api(project(":libraries:serializers"))
     api(project(":app-features:core"))
-    api(project(":app-features:recent_servers"))
     implementation(libs.androidx.datastore)
     implementation(libs.bundles.androidx.compose)
     debugImplementation(libs.bundles.androidx.compose.tooling)

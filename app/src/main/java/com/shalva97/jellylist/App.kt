@@ -1,9 +1,9 @@
 package com.shalva97.jellylist
 
 import android.app.Application
-import com.example.recent_servers.di.recentServersModule
 import com.shalva97.home.HomeViewModel
 import com.shalva97.login.LoginScreenViewModel
+import com.shalva97.login.recent_servers.di.recentServersModule
 import com.shalva97.login.userDataDatastoreModule
 import data.JellyfinMediaRepo
 import di.jellyFinModule

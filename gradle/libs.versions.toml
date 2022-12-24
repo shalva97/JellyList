@@ -1,5 +1,5 @@
 [versions]
-minSdk = "23"
+minSdk = "24"
 targetSdk = "33"
 compileSdk = "33"
 versionCode = "1"
@@ -41,8 +41,6 @@ mockk-android = "io.mockk:mockk-android:1.13.2"
 jellyfin = "org.jellyfin.sdk:jellyfin-core:1.3.7"
 junit = "junit:junit:4.13.2"
 robolectric = "org.robolectric:robolectric:4.9"
-picocli = "info.picocli:picocli:4.6.3"
-picocli-codegen = "info.picocli:picocli-codegen:4.6.3"
 protobuf = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf:1.4.1"
 
 [bundles]
