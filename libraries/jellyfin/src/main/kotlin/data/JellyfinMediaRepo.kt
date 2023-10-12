@@ -1,10 +1,12 @@
 package data
 
 import org.jellyfin.sdk.api.client.ApiClient
+import org.jellyfin.sdk.api.client.extensions.itemsApi
 import org.jellyfin.sdk.api.client.extensions.userLibraryApi
 import org.jellyfin.sdk.api.client.extensions.userViewsApi
 import org.jellyfin.sdk.api.client.extensions.videosApi
 import org.jellyfin.sdk.model.api.BaseItemDto
+import org.jellyfin.sdk.model.api.BaseItemDtoQueryResult
 import java.util.*
 
 class JellyfinMediaRepo(
@@ -19,14 +21,19 @@ class JellyfinMediaRepo(
         )
     }
 
-    suspend fun latestMovies(): List<BaseItemDto> {
+    suspend fun latestContent(): List<BaseItemDto> {
         val movies = apiClient.userLibraryApi.getLatestMedia()
 
         return movies.content
     }
 
-    // TODO this will return the list of user media folders
-    suspend fun userMedia() {
+    suspend fun locations(): BaseItemDtoQueryResult {
         val mediaItems = apiClient.userViewsApi.getUserViews()
+        return mediaItems.content
+    }
+
+    suspend fun resumableContent(): BaseItemDtoQueryResult {
+        val mediaItems = apiClient.itemsApi.getResumeItems(limit = 12)
+        return mediaItems.content
     }
 }
